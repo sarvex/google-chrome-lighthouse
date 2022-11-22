@@ -4,24 +4,26 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {parseManifest} from '../lighthouse-core/lib/manifest-parser.js';
-import {Simulator} from '../lighthouse-core/lib/dependency-graph/simulator/simulator.js';
-import {LighthouseError} from '../lighthouse-core/lib/lh-error.js';
-import {NetworkRequest as _NetworkRequest} from '../lighthouse-core/lib/network-request.js';
+import {parseManifest} from '../core/lib/manifest-parser.js';
+import {Simulator} from '../core/lib/dependency-graph/simulator/simulator.js';
+import {LighthouseError} from '../core/lib/lh-error.js';
+import {NetworkRequest as _NetworkRequest} from '../core/lib/network-request.js';
 import speedline from 'speedline-core';
-import TextSourceMap from '../lighthouse-core/lib/cdt/generated/SourceMap.js';
-import {ArbitraryEqualityMap} from '../lighthouse-core/lib/arbitrary-equality-map.js';
-import type { TaskNode as _TaskNode } from '../lighthouse-core/lib/tracehouse/main-thread-tasks.js';
+import TextSourceMap from '../core/lib/cdt/generated/SourceMap.js';
+import {ArbitraryEqualityMap} from '../core/lib/arbitrary-equality-map.js';
+import type { TaskNode as _TaskNode } from '../core/lib/tracehouse/main-thread-tasks.js';
 import AuditDetails from './lhr/audit-details'
 import Config from './config';
 import Gatherer from './gatherer';
 import {IcuMessage} from './lhr/i18n';
 import LHResult from './lhr/lhr'
 import Protocol from './protocol';
+import Util from './utility-types.js';
+import Audit from './audit.js';
 
 export interface Artifacts extends BaseArtifacts, GathererArtifacts {}
 
-export type FRArtifacts = StrictOmit<Artifacts,
+export type FRArtifacts = Util.StrictOmit<Artifacts,
   | 'Fonts'
   | 'Manifest'
   | 'MixedContent'
@@ -179,7 +181,7 @@ export interface GathererArtifacts extends PublicGathererArtifacts,LegacyBaseArt
 }
 
 declare module Artifacts {
-  type ComputedContext = Immutable<{
+  type ComputedContext = Util.Immutable<{
     computedCache: Map<string, ArbitraryEqualityMap>;
   }>;
 
@@ -188,8 +190,6 @@ declare module Artifacts {
   type MetaElement = Artifacts['MetaElements'][0];
 
   interface URL {
-    /** URL of the main frame before Lighthouse starts. */
-    initialUrl: string;
     /**
      * URL of the initially requested URL during a Lighthouse navigation.
      * Will be `undefined` in timespan/snapshot.
@@ -200,12 +200,8 @@ declare module Artifacts {
      * Will be `undefined` in timespan/snapshot.
      */
     mainDocumentUrl?: string;
-    /**
-     * Will be the same as `mainDocumentUrl` in navigation mode.
-     * Wil be the URL of the main frame after Lighthouse finishes in timespan/snapshot.
-     * TODO: Use the main frame URL in navigation mode as well.
-     */
-    finalUrl: string;
+    /** URL displayed on the page after Lighthouse finishes. */
+    finalDisplayedUrl: string;
   }
 
   interface NodeDetails {
@@ -578,6 +574,7 @@ declare module Artifacts {
     node: NodeDetails;
     nodeId?: number;
     animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[];
+    type?: string;
   }
 
   interface ViewportDimensions {
@@ -639,7 +636,7 @@ declare module Artifacts {
   interface MetricComputationDataInput {
     devtoolsLog: DevtoolsLog;
     trace: Trace;
-    settings: Immutable<Config.Settings>;
+    settings: Audit.Context['settings'];
     gatherContext: Artifacts['GatherContext'];
     simulator?: InstanceType<typeof Simulator>;
     URL: Artifacts['URL'];
