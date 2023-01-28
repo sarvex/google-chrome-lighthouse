@@ -35,11 +35,15 @@ const URL_PREFIXES = ['http://', 'https://', 'data:'];
 export class DetailsRenderer {
   /**
    * @param {DOM} dom
-   * @param {{fullPageScreenshot?: LH.Result.FullPageScreenshot}} [options]
+   * @param {{
+   *  fullPageScreenshot?: LH.Result.FullPageScreenshot,
+   *  entities?: LH.Result.Entities,
+   * }} [options]
    */
   constructor(dom, options = {}) {
     this._dom = dom;
     this._fullPageScreenshot = options.fullPageScreenshot;
+    this._entities = options.entities;
   }
 
   /**
@@ -376,6 +380,98 @@ export class DetailsRenderer {
   }
 
   /**
+   * Renders a group heading item.
+   * @param {TableItem} group
+   * @param {LH.Audit.Details.TableColumnHeading[]} headings
+   */
+  _renderTableGroupRow(group, headings) {
+    const fragment = this._renderTableRowsFromItem(group, headings);
+    const renderedRows = this._dom.findAll('tr', fragment);
+    renderedRows[0]?.classList.add('lh-row--group');
+
+    const entityName = group.entity?.toString() || '';
+    const entityIndex = this._entities?.entityIndexByName[entityName];
+    /** @type {LH.Result.LhrEntity|undefined} */
+    let matchedEntity;
+    if (typeof entityIndex !== 'undefined') {
+      matchedEntity = this._entities?.list[entityIndex];
+    }
+
+    if (matchedEntity?.category) {
+      const categoryChipEl = this._dom.createElement('span');
+      categoryChipEl.classList.add('lh-audit__adorn');
+      categoryChipEl.textContent = matchedEntity?.category.toString();
+      renderedRows[0]?.children[0]?.append(' ', categoryChipEl);
+    }
+
+    if (matchedEntity?.isFirstParty) {
+      const firstPartyChipEl = this._dom.createElement('span');
+      firstPartyChipEl.classList.add('lh-audit__adorn', 'lh-audit__adorn1p');
+      firstPartyChipEl.textContent = '1st party'; // TODO: i18n
+      renderedRows[0]?.children[0]?.append(' ', firstPartyChipEl);
+    }
+
+    if (matchedEntity?.homepage) {
+      const entityLinkEl = this._dom.createElement('a');
+      entityLinkEl.href = matchedEntity?.homepage;
+      entityLinkEl.target = '_blank';
+      entityLinkEl.title = 'Open link in a new tab'; // TOOD: i18n
+      entityLinkEl.classList.add('lh-report-icon--external');
+      renderedRows[0]?.children[0]?.append(' ', entityLinkEl);
+    }
+
+    return fragment;
+  }
+
+  /**
+   * Computes aggregations and groups by entity from a list of TableItem's
+   * @param {TableItem[]} items
+   * @param {TableColumnHeading[]} headings
+   * @return {TableItem[]}
+   */
+  _computeEntityAggregations(items, headings) {
+    // Exclude pre-aggregated and non-aggregatable audit results.
+    // Eg. Third-party Summary audit has `.entity` as an Object
+    if (!items?.length || typeof(items[0].entity) !== 'string') {
+      return [];
+    }
+
+    const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
+    /** @type {string[]} */
+    const aggregateKeys = [];
+    for (const heading of headings) {
+      if (!heading.key || heading.dontAggregate) continue;
+      if ('valueType' in heading && supportedAggregations.includes(heading.valueType)) {
+        aggregateKeys.push(heading.key);
+      }
+    }
+
+    // Grab the first column's key to group our entity link
+    const primaryKey = headings[0].key || '';
+
+    /** @type {Map<string, TableItem>} */
+    const byEntity = new Map();
+    for (const item of items) {
+      const entityName = item.entity?.toString() || '';
+      /** @type {TableItem} */
+      const group = byEntity.get(entityName) || {
+        [primaryKey]: {
+          type: 'link',
+          url: '',
+          text: entityName || 'Unattributable', // TODO: i18n
+        },
+        entity: entityName,
+      };
+      for (const key of aggregateKeys) {
+        group[key] = Number(group[key] || 0) + Number(item[key]);
+      }
+      byEntity.set(entityName, group);
+    }
+
+    return [...byEntity.values()];
+  }
+
+  /**
    * @param {{headings: TableColumnHeading[], items: TableItem[]}} details
    * @return {Element}
    */
@@ -394,29 +490,47 @@ export class DetailsRenderer {
       this._dom.createChildOf(theadTrElem, 'th', classes).append(labelEl);
     }
 
+    const aggregations = this._computeEntityAggregations(details.items, details.headings);
+
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
     let even = true;
-    for (const item of details.items) {
-      const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
-
-      // The attribute item.entity could be a string (entity-classification), or
-      // a LinkValue for ThirdPartySummary audit.
-      let entityName;
-      if (typeof item.entity === 'object' && item.entity.type === 'link') {
-        entityName = item.entity.text;
-      } else if (typeof item.entity === 'string') {
-        entityName = item.entity;
-      }
-
-      for (const rowEl of this._dom.findAll('tr', rowsFragment)) {
-        // For zebra styling.
-        rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
-        if (entityName && !rowEl.classList.contains('lh-sub-item-row')) {
-          rowEl.dataset.entity = entityName;
+    if (aggregations.length) {
+      for (const group of aggregations) {
+        const aggregateFragment = this._renderTableGroupRow(group, details.headings);
+        // Find all items that match the entity.
+        for (const item of details.items.filter((item) => item.entity === group.entity)) {
+          aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }
+        if (typeof(group.entity) === 'string') {
+          this._dom.findAll('tr', aggregateFragment).forEach(
+            row => (row.dataset.entity = group.entity?.toString()));
+        }
+        even = !even;
+        tbodyElem.append(aggregateFragment);
       }
-      even = !even;
-      tbodyElem.append(rowsFragment);
+    } else {
+      for (const item of details.items) {
+        const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
+
+        // The attribute item.entity could be a string (entity-classification), or
+        // a LinkValue for ThirdPartySummary audit.
+        let entityName;
+        if (typeof item.entity === 'object' && item.entity.type === 'link') {
+          entityName = item.entity.text;
+        } else if (typeof item.entity === 'string') {
+          entityName = item.entity;
+        }
+
+        for (const rowEl of this._dom.findAll('tr', rowsFragment)) {
+          // For zebra styling.
+          rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
+          if (entityName && !rowEl.classList.contains('lh-sub-item-row')) {
+            rowEl.dataset.entity = entityName;
+          }
+        }
+        even = !even;
+        tbodyElem.append(rowsFragment);
+      }
     }
 
     return tableElem;

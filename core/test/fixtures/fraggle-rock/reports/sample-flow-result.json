@@ -1689,7 +1689,8 @@
                   "key": "startTime",
                   "valueType": "ms",
                   "granularity": 1,
-                  "label": "Start Time"
+                  "label": "Start Time",
+                  "dontAggregate": true
                 },
                 {
                   "key": "duration",
@@ -4234,12 +4235,14 @@
           "list": [
             {
               "name": "mikescerealshack.co",
+              "category": "",
               "isFirstParty": true,
               "isUnrecognized": true
             },
             {
               "name": "Google Fonts",
-              "homepage": "https://fonts.google.com/"
+              "homepage": "https://fonts.google.com/",
+              "category": "cdn"
             }
           ],
           "firstParty": "mikescerealshack.co",
@@ -8727,7 +8730,8 @@
                   "key": "startTime",
                   "valueType": "ms",
                   "granularity": 1,
-                  "label": "Start Time"
+                  "label": "Start Time",
+                  "dontAggregate": true
                 },
                 {
                   "key": "duration",
@@ -8867,7 +8871,8 @@
                   "key": "cacheLifetimeMs",
                   "valueType": "ms",
                   "label": "Cache TTL",
-                  "displayUnit": "duration"
+                  "displayUnit": "duration",
+                  "dontAggregate": true
                 },
                 {
                   "key": "totalBytes",
@@ -9861,12 +9866,14 @@
           "list": [
             {
               "name": "mikescerealshack.co",
+              "category": "",
               "isFirstParty": true,
               "isUnrecognized": true
             },
             {
               "name": "Algolia",
-              "homepage": "https://www.algolia.com/"
+              "homepage": "https://www.algolia.com/",
+              "category": "utility"
             }
           ],
           "firstParty": "mikescerealshack.co",
@@ -17368,7 +17375,8 @@
                   "key": "startTime",
                   "valueType": "ms",
                   "granularity": 1,
-                  "label": "Start Time"
+                  "label": "Start Time",
+                  "dontAggregate": true
                 },
                 {
                   "key": "duration",
@@ -20091,12 +20099,14 @@
           "list": [
             {
               "name": "mikescerealshack.co",
+              "category": "",
               "isFirstParty": true,
               "isUnrecognized": true
             },
             {
               "name": "Google Fonts",
-              "homepage": "https://fonts.google.com/"
+              "homepage": "https://fonts.google.com/",
+              "category": "cdn"
             }
           ],
           "firstParty": "mikescerealshack.co",

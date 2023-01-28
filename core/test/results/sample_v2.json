@@ -2427,7 +2427,8 @@
             "key": "startTime",
             "valueType": "ms",
             "granularity": 1,
-            "label": "Start Time"
+            "label": "Start Time",
+            "dontAggregate": true
           },
           {
             "key": "duration",
@@ -3770,7 +3771,8 @@
             "key": "cacheLifetimeMs",
             "valueType": "ms",
             "label": "Cache TTL",
-            "displayUnit": "duration"
+            "displayUnit": "duration",
+            "dontAggregate": true
           },
           {
             "key": "totalBytes",
@@ -6447,12 +6449,14 @@
     "list": [
       {
         "name": "localhost",
+        "category": "",
         "isFirstParty": true,
         "isUnrecognized": true
       },
       {
         "name": "Google CDN",
-        "homepage": "https://developers.google.com/speed/libraries/"
+        "homepage": "https://developers.google.com/speed/libraries/",
+        "category": "cdn"
       }
     ],
     "firstParty": "localhost",
