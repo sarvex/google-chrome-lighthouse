@@ -100,12 +100,13 @@ class LongTasks extends Audit {
       /* eslint-disable max-len */
       {key: 'url', valueType: 'url', label: str_(i18n.UIStrings.columnURL)},
       {key: 'startTime', valueType: 'ms', granularity: 1, label: str_(i18n.UIStrings.columnStartTime),
-        dontAggregate: true},
+        noAggregation: true},
       {key: 'duration', valueType: 'ms', granularity: 1, label: str_(i18n.UIStrings.columnDuration)},
       /* eslint-enable max-len */
     ];
 
-    const tableDetails = Audit.makeTableDetails(headings, results);
+    const tableDetails = Audit.makeTableDetails(headings, results,
+        undefined, [['duration']]);
 
     let displayValue;
     if (results.length > 0) {

@@ -533,6 +533,11 @@
                   "groupLabel": "Script Parsing & Compilation",
                   "duration": 25.208000000000006
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -594,7 +599,12 @@
               ],
               "summary": {
                 "wastedMs": 288.41200000000015
-              }
+              },
+              "sortBy": [
+                [
+                  "total"
+                ]
+              ]
             }
           },
           "uses-rel-preload": {
@@ -624,7 +634,12 @@
               "type": "opportunity",
               "headings": [],
               "items": [],
-              "overallSavingsMs": 0
+              "overallSavingsMs": 0,
+              "sortBy": [
+                [
+                  "wastedMs"
+                ]
+              ]
             }
           },
           "font-display": {
@@ -1135,6 +1150,11 @@
                   "origin": "https://fonts.gstatic.com",
                   "rtt": 3.406000000000006
                 }
+              ],
+              "sortBy": [
+                [
+                  "rtt"
+                ]
               ]
             }
           },
@@ -1179,6 +1199,11 @@
                   "origin": "https://events.mikescerealshack.co",
                   "serverResponseTime": 3.7920000000000016
                 }
+              ],
+              "sortBy": [
+                [
+                  "serverResponseTime"
+                ]
               ]
             }
           },
@@ -1464,7 +1489,8 @@
               "summary": {
                 "wastedBytes": 20174,
                 "wastedMs": 0
-              }
+              },
+              "isAggregated": true
             }
           },
           "third-party-facades": {
@@ -1690,7 +1716,7 @@
                   "valueType": "ms",
                   "granularity": 1,
                   "label": "Start Time",
-                  "dontAggregate": true
+                  "noAggregation": true
                 },
                 {
                   "key": "duration",
@@ -1715,6 +1741,11 @@
                   "duration": 96,
                   "startTime": 965.8119999999999
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -1843,6 +1874,11 @@
                 }
               ],
               "overallSavingsMs": 0,
+              "sortBy": [
+                [
+                  "wastedMs"
+                ]
+              ],
               "debugData": {
                 "type": "debugdata",
                 "initiatorPath": [
@@ -2566,6 +2602,11 @@
                   "url": "https://www.mikescerealshack.co/_next/static/css/08dcb440d7d83b488817.css",
                   "totalBytes": 4994
                 }
+              ],
+              "sortBy": [
+                [
+                  "totalBytes"
+                ]
               ]
             }
           },
@@ -2584,7 +2625,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "render-blocking-resources": {
@@ -2616,7 +2662,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unminified-javascript": {
@@ -2634,7 +2685,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-css-rules": {
@@ -2651,7 +2707,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-javascript": {
@@ -2668,7 +2729,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "modern-image-formats": {
@@ -2686,7 +2752,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-optimized-images": {
@@ -2704,7 +2775,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-text-compression": {
@@ -2721,7 +2797,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-responsive-images": {
@@ -2738,7 +2819,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "efficient-animated-content": {
@@ -2755,7 +2841,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "duplicated-javascript": {
@@ -2772,7 +2863,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "legacy-javascript": {
@@ -2833,7 +2929,12 @@
                 }
               ],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 57
+              "overallSavingsBytes": 57,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "doctype": {
@@ -7901,6 +8002,11 @@
                   "groupLabel": "Script Parsing & Compilation",
                   "duration": 1.264
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -7962,7 +8068,12 @@
               ],
               "summary": {
                 "wastedMs": 352.6489999999996
-              }
+              },
+              "sortBy": [
+                [
+                  "total"
+                ]
+              ]
             }
           },
           "network-requests": {
@@ -8323,6 +8434,11 @@
                   "origin": "https://cdn.mikescerealshack.co",
                   "rtt": 5.454999999999998
                 }
+              ],
+              "sortBy": [
+                [
+                  "rtt"
+                ]
               ]
             }
           },
@@ -8363,6 +8479,11 @@
                   "origin": "https://mnl4bjjsnz-dsn.algolia.net",
                   "serverResponseTime": 0
                 }
+              ],
+              "sortBy": [
+                [
+                  "serverResponseTime"
+                ]
               ]
             }
           },
@@ -8660,7 +8781,8 @@
               "summary": {
                 "wastedBytes": 25328,
                 "wastedMs": 0
-              }
+              },
+              "isAggregated": true
             }
           },
           "layout-shift-elements": {
@@ -8728,7 +8850,7 @@
                   "valueType": "ms",
                   "granularity": 1,
                   "label": "Start Time",
-                  "dontAggregate": true
+                  "noAggregation": true
                 },
                 {
                   "key": "duration",
@@ -8743,6 +8865,11 @@
                   "duration": 172.833,
                   "startTime": 1903.231
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -8869,7 +8996,7 @@
                   "valueType": "ms",
                   "label": "Cache TTL",
                   "displayUnit": "duration",
-                  "dontAggregate": true
+                  "noAggregation": true
                 },
                 {
                   "key": "totalBytes",
@@ -8991,7 +9118,12 @@
               ],
               "summary": {
                 "wastedBytes": 21491.399999999998
-              }
+              },
+              "sortBy": [
+                [
+                  "totalBytes"
+                ]
+              ]
             }
           },
           "total-byte-weight": {
@@ -9058,6 +9190,11 @@
                   "url": "https://cdn.mikescerealshack.co/frames/s8/e13/128w/b997cdb40263ff124e2a245c5e86a9a3.jpg",
                   "totalBytes": 3142
                 }
+              ],
+              "sortBy": [
+                [
+                  "totalBytes"
+                ]
               ]
             }
           },
@@ -9075,7 +9212,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unminified-javascript": {
@@ -9093,7 +9235,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-css-rules": {
@@ -9110,7 +9257,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-javascript": {
@@ -9127,7 +9279,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "modern-image-formats": {
@@ -9145,7 +9302,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-optimized-images": {
@@ -9163,7 +9325,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-text-compression": {
@@ -9180,7 +9347,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-responsive-images": {
@@ -9197,7 +9369,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "efficient-animated-content": {
@@ -9214,7 +9391,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "duplicated-javascript": {
@@ -9231,7 +9413,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "legacy-javascript": {
@@ -9248,7 +9435,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "inspector-issues": {
@@ -9451,6 +9643,11 @@
                         ]
                       }
                     }
+                  ],
+                  "sortBy": [
+                    [
+                      "total"
+                    ]
                   ]
                 },
                 {
@@ -16370,6 +16567,11 @@
                   "groupLabel": "Rendering",
                   "duration": 14.543999999999997
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -16437,7 +16639,12 @@
               ],
               "summary": {
                 "wastedMs": 169.10399999999998
-              }
+              },
+              "sortBy": [
+                [
+                  "total"
+                ]
+              ]
             }
           },
           "uses-rel-preload": {
@@ -16467,7 +16674,12 @@
               "type": "opportunity",
               "headings": [],
               "items": [],
-              "overallSavingsMs": 0
+              "overallSavingsMs": 0,
+              "sortBy": [
+                [
+                  "wastedMs"
+                ]
+              ]
             }
           },
           "font-display": {
@@ -16948,6 +17160,11 @@
                   "origin": "https://fonts.gstatic.com",
                   "rtt": 0.003
                 }
+              ],
+              "sortBy": [
+                [
+                  "rtt"
+                ]
               ]
             }
           },
@@ -16992,6 +17209,11 @@
                   "origin": "https://fonts.gstatic.com",
                   "serverResponseTime": 0.874
                 }
+              ],
+              "sortBy": [
+                [
+                  "serverResponseTime"
+                ]
               ]
             }
           },
@@ -17256,7 +17478,8 @@
               "summary": {
                 "wastedBytes": 0,
                 "wastedMs": 0
-              }
+              },
+              "isAggregated": true
             }
           },
           "third-party-facades": {
@@ -17373,7 +17596,7 @@
                   "valueType": "ms",
                   "granularity": 1,
                   "label": "Start Time",
-                  "dontAggregate": true
+                  "noAggregation": true
                 },
                 {
                   "key": "duration",
@@ -17393,6 +17616,11 @@
                   "duration": 63,
                   "startTime": 752.7026
                 }
+              ],
+              "sortBy": [
+                [
+                  "duration"
+                ]
               ]
             }
           },
@@ -17540,6 +17768,11 @@
                 }
               ],
               "overallSavingsMs": 0,
+              "sortBy": [
+                [
+                  "wastedMs"
+                ]
+              ],
               "debugData": {
                 "type": "debugdata",
                 "initiatorPath": [
@@ -18280,6 +18513,11 @@
                   "url": "https://www.mikescerealshack.co/logo-text.svg",
                   "totalBytes": 44
                 }
+              ],
+              "sortBy": [
+                [
+                  "totalBytes"
+                ]
               ]
             }
           },
@@ -18298,7 +18536,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "render-blocking-resources": {
@@ -18330,7 +18573,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unminified-javascript": {
@@ -18348,7 +18596,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-css-rules": {
@@ -18365,7 +18618,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "unused-javascript": {
@@ -18382,7 +18640,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "modern-image-formats": {
@@ -18446,7 +18709,12 @@
                 }
               ],
               "overallSavingsMs": 300,
-              "overallSavingsBytes": 68889.75
+              "overallSavingsBytes": 68889.75,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-optimized-images": {
@@ -18464,7 +18732,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-text-compression": {
@@ -18481,7 +18754,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "uses-responsive-images": {
@@ -18542,7 +18820,12 @@
                 }
               ],
               "overallSavingsMs": 300,
-              "overallSavingsBytes": 52102
+              "overallSavingsBytes": 52102,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "efficient-animated-content": {
@@ -18559,7 +18842,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "duplicated-javascript": {
@@ -18576,7 +18864,12 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "legacy-javascript": {
@@ -18637,7 +18930,12 @@
                 }
               ],
               "overallSavingsMs": 0,
-              "overallSavingsBytes": 0
+              "overallSavingsBytes": 0,
+              "sortBy": [
+                [
+                  "wastedBytes"
+                ]
+              ]
             }
           },
           "doctype": {

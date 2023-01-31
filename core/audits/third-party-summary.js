@@ -247,12 +247,15 @@ class ThirdPartySummary extends Audit {
       };
     }
 
+    const details = Audit.makeTableDetails(headings, results, overallSummary);
+    details.isAggregated = true;
+
     return {
       score: Number(overallSummary.wastedMs <= PASS_THRESHOLD_IN_MS),
       displayValue: str_(UIStrings.displayValue, {
         timeInMs: overallSummary.wastedMs,
       }),
-      details: Audit.makeTableDetails(headings, results, overallSummary),
+      details,
     };
   }
 }

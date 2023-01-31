@@ -106,8 +106,8 @@ declare module Details {
     isAggregated?: boolean;
   }
 
-  /** An array of sorting directives [key, direction] */
-  type TableSortOrder = Array<[string /* TableColumnHeading.key */, ('asc' | 'desc')]>;
+  /** An array of sorting directives as a key and an optional asc direction (desc by default) */
+  type TableSortOrder = Array<[string /* TableColumnHeading.key */]|[string, 'asc']>;
 
   /** A table item for rows that are nested within a top-level TableItem (row). */
   interface TableSubItems {
@@ -161,7 +161,7 @@ declare module Details {
     granularity?: number;
 
     /** Ignore this column while aggregating. */
-    dontAggregate?: boolean;
+    noAggregation?: boolean;
   }
 
   interface TableItem {

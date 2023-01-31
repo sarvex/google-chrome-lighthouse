@@ -1083,6 +1083,11 @@
             "groupLabel": "Script Parsing & Compilation",
             "duration": 16.858999999999998
           }
+        ],
+        "sortBy": [
+          [
+            "duration"
+          ]
         ]
       }
     },
@@ -1144,7 +1149,12 @@
         ],
         "summary": {
           "wastedMs": 1324.3129999999999
-        }
+        },
+        "sortBy": [
+          [
+            "total"
+          ]
+        ]
       }
     },
     "uses-rel-preload": {
@@ -1174,7 +1184,12 @@
         "type": "opportunity",
         "headings": [],
         "items": [],
-        "overallSavingsMs": 0
+        "overallSavingsMs": 0,
+        "sortBy": [
+          [
+            "wastedMs"
+          ]
+        ]
       }
     },
     "font-display": {
@@ -1729,6 +1744,11 @@
             "origin": "http://localhost:10200",
             "rtt": 0.20899999999999996
           }
+        ],
+        "sortBy": [
+          [
+            "rtt"
+          ]
         ]
       }
     },
@@ -1765,6 +1785,11 @@
             "origin": "http://ajax.googleapis.com",
             "serverResponseTime": 556.128
           }
+        ],
+        "sortBy": [
+          [
+            "serverResponseTime"
+          ]
         ]
       }
     },
@@ -2028,6 +2053,11 @@
             "requestCount": 0,
             "transferSize": 0
           }
+        ],
+        "sortBy": [
+          [
+            "sizeOverBudget"
+          ]
         ]
       }
     },
@@ -2081,6 +2111,11 @@
             "measurement": 1175,
             "overBudget": 1075
           }
+        ],
+        "sortBy": [
+          [
+            "overBudget"
+          ]
         ]
       }
     },
@@ -2232,7 +2267,8 @@
         "summary": {
           "wastedBytes": 30346,
           "wastedMs": 0
-        }
+        },
+        "isAggregated": true
       }
     },
     "third-party-facades": {
@@ -2428,7 +2464,7 @@
             "valueType": "ms",
             "granularity": 1,
             "label": "Start Time",
-            "dontAggregate": true
+            "noAggregation": true
           },
           {
             "key": "duration",
@@ -2448,6 +2484,11 @@
             "duration": 145.815,
             "startTime": 8044.755
           }
+        ],
+        "sortBy": [
+          [
+            "duration"
+          ]
         ]
       }
     },
@@ -2664,6 +2705,11 @@
           }
         ],
         "overallSavingsMs": 0,
+        "sortBy": [
+          [
+            "wastedMs"
+          ]
+        ],
         "debugData": {
           "type": "debugdata",
           "initiatorPath": [
@@ -3772,7 +3818,7 @@
             "valueType": "ms",
             "label": "Cache TTL",
             "displayUnit": "duration",
-            "dontAggregate": true
+            "noAggregation": true
           },
           {
             "key": "totalBytes",
@@ -3919,7 +3965,12 @@
         ],
         "summary": {
           "wastedBytes": 1282879
-        }
+        },
+        "sortBy": [
+          [
+            "totalBytes"
+          ]
+        ]
       }
     },
     "total-byte-weight": {
@@ -3986,6 +4037,11 @@
             "url": "http://localhost:10200/dobetterweb/lighthouse-480x318.jpg?lcp",
             "totalBytes": 24822
           }
+        ],
+        "sortBy": [
+          [
+            "totalBytes"
+          ]
         ]
       }
     },
@@ -4004,7 +4060,12 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "overallSavingsBytes": 0
+        "overallSavingsBytes": 0,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "render-blocking-resources": {
@@ -4084,7 +4145,12 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "overallSavingsBytes": 0
+        "overallSavingsBytes": 0,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "unminified-javascript": {
@@ -4125,7 +4191,12 @@
           }
         ],
         "overallSavingsMs": 750,
-        "overallSavingsBytes": 83568
+        "overallSavingsBytes": 83568,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "unused-css-rules": {
@@ -4142,7 +4213,12 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "overallSavingsBytes": 0
+        "overallSavingsBytes": 0,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "unused-javascript": {
@@ -4198,7 +4274,12 @@
           }
         ],
         "overallSavingsMs": 600,
-        "overallSavingsBytes": 65111
+        "overallSavingsBytes": 65111,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "modern-image-formats": {
@@ -4382,7 +4463,12 @@
           }
         ],
         "overallSavingsMs": 450,
-        "overallSavingsBytes": 77874.3
+        "overallSavingsBytes": 77874.3,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "uses-optimized-images": {
@@ -4400,7 +4486,12 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "overallSavingsBytes": 0
+        "overallSavingsBytes": 0,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "uses-text-compression": {
@@ -4444,7 +4535,12 @@
           }
         ],
         "overallSavingsMs": 1950,
-        "overallSavingsBytes": 146478
+        "overallSavingsBytes": 146478,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "uses-responsive-images": {
@@ -4549,7 +4645,12 @@
           }
         ],
         "overallSavingsMs": 300,
-        "overallSavingsBytes": 50519
+        "overallSavingsBytes": 50519,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "efficient-animated-content": {
@@ -4588,7 +4689,12 @@
           }
         ],
         "overallSavingsMs": 3300,
-        "overallSavingsBytes": 682028
+        "overallSavingsBytes": 682028,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "duplicated-javascript": {
@@ -4605,7 +4711,12 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "overallSavingsBytes": 0
+        "overallSavingsBytes": 0,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "legacy-javascript": {
@@ -4676,7 +4787,12 @@
           }
         ],
         "overallSavingsMs": 150,
-        "overallSavingsBytes": 21189
+        "overallSavingsBytes": 21189,
+        "sortBy": [
+          [
+            "wastedBytes"
+          ]
+        ]
       }
     },
     "doctype": {

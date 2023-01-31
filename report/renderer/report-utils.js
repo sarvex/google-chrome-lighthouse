@@ -10,20 +10,6 @@ import {Globals} from './report-globals.js';
 const SCREENSHOT_PREFIX = 'data:image/jpeg;base64,';
 const RATINGS = Util.RATINGS;
 
-// Entity sort orders for each audit. This information is static and thus need not be in LHR.
-// In future, this could move to each audit and could be extracted during a build.
-/** @type {Record<string, LH.Audit.Details.TableSortOrder>} */
-const ENTITY_SORT_DIRECTIVES = {
-  'bootup-time': [['total', 'desc']],
-  'unused-javascript': [['wastedBytes', 'desc']],
-  'long-tasks': [['duration', 'desc']],
-  'mainthread-work-breakdown': [['duration', 'desc']],
-  'network-server-latency': [['serverResponseTime', 'desc']],
-  'third-party-summary': [['blockingTime', 'desc'], ['transferSize', 'desc']],
-  'uses-rel-preconnect': [['wastedMs', 'desc']],
-  'uses-rel-preload': [['wastedMs', 'desc']],
-};
-
 class ReportUtils {
   /**
    * Returns a new LHR that's reshaped for slightly better ergonomics within the report rendereer.
@@ -106,12 +92,8 @@ class ReportUtils {
 
         // Attach table/opportunity items with entity information.
         if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
-          // third-party-summary produces a per-entity aggregated result.
-          if (audit.id === 'third-party-summary') {
-            audit.details.isAggregated = true;
-          }
           if (!audit.details.isAggregated && result.entities) {
-            ReportUtils.classifyEntities(result.entities, audit.id, audit.details);
+            ReportUtils.classifyEntities(result.entities, audit.details);
           }
         }
 
@@ -247,10 +229,9 @@ class ReportUtils {
   /**
    * Mark TableItems/OpportunityItems with entity names.
    * @param {LH.Result.Entities} entityClassification
-   * @param {string} auditId
    * @param {LH.FormattedIcu<LH.Audit.Details.Opportunity|LH.Audit.Details.Table>} details
    */
-  static classifyEntities(entityClassification, auditId, details) {
+  static classifyEntities(entityClassification, details) {
     // If details.items are already marked with entity attribute during an audit, nothing to do here.
     const {items, headings} = details;
     if (!items.length || items.some(item => item.entity)) return;
@@ -275,20 +256,6 @@ class ReportUtils {
       const entity = entityClassification.list[entityIndex];
       item.entity = entity.name;
     }
-
-    // If entity classification was successful, inject sort order of entities.
-    // This information is static so we don't bloat LHR with it.
-    const sortBy = ReportUtils.getEntitySortOrder(auditId);
-    if (sortBy) details.sortBy = sortBy;
-  }
-
-  /**
-   * Determines the sort order for an audit, given its id.
-   * @param {string} auditId
-   * @return {LH.Audit.Details.TableSortOrder | undefined}
-   */
-  static getEntitySortOrder(auditId) {
-    return ENTITY_SORT_DIRECTIVES[auditId];
   }
 
   /**
