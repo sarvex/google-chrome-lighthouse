@@ -424,9 +424,9 @@ export class DetailsRenderer {
    */
   _computeEntityAggregations(details) {
     const {items, headings, sortBy} = details;
-    // Exclude pre-aggregated audit results.
+    // Exclude pre-aggregated audits and results without entity classification.
     // Eg. Third-party Summary comes pre-aggregated.
-    if (!items.length || details.isAggregated) {
+    if (!items.length || details.isAggregated || !items.some(item => item.entity)) {
       return [];
     }
 
