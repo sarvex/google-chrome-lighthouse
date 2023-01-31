@@ -380,16 +380,12 @@ export class DetailsRenderer {
   }
 
   /**
-   * Renders a group heading item.
-   * @param {TableItem} group
-   * @param {LH.Audit.Details.TableColumnHeading[]} headings
+   * Adorn a table row element with entity chips based on [data-entity] attribute.
+   * @param {HTMLTableRowElement} rowEl
    */
-  _renderTableGroupRow(group, headings) {
-    const fragment = this._renderTableRowsFromItem(group, headings);
-    const renderedRows = this._dom.findAll('tr', fragment);
-    renderedRows[0]?.classList.add('lh-row--group');
-
-    const entityName = group.entity?.toString() || '';
+  _adornTableRowWithEntityChips(rowEl) {
+    const entityName = rowEl.dataset.entity;
+    if (!entityName) return;
     const entityIndex = this._entities?.entityIndexByName[entityName];
     /** @type {LH.Result.LhrEntity|undefined} */
     let matchedEntity;
@@ -401,14 +397,14 @@ export class DetailsRenderer {
       const categoryChipEl = this._dom.createElement('span');
       categoryChipEl.classList.add('lh-audit__adorn');
       categoryChipEl.textContent = matchedEntity?.category.toString();
-      renderedRows[0]?.children[0]?.append(' ', categoryChipEl);
+      rowEl.children[0]?.append(' ', categoryChipEl);
     }
 
     if (matchedEntity?.isFirstParty) {
       const firstPartyChipEl = this._dom.createElement('span');
       firstPartyChipEl.classList.add('lh-audit__adorn', 'lh-audit__adorn1p');
       firstPartyChipEl.textContent = '1st party'; // TODO: i18n
-      renderedRows[0]?.children[0]?.append(' ', firstPartyChipEl);
+      rowEl.children[0]?.append(' ', firstPartyChipEl);
     }
 
     if (matchedEntity?.homepage) {
@@ -417,10 +413,8 @@ export class DetailsRenderer {
       entityLinkEl.target = '_blank';
       entityLinkEl.title = 'Open link in a new tab'; // TOOD: i18n
       entityLinkEl.classList.add('lh-report-icon--external');
-      renderedRows[0]?.children[0]?.append(' ', entityLinkEl);
+      rowEl.children[0]?.append(' ', entityLinkEl);
     }
-
-    return fragment;
   }
 
   /**
@@ -432,7 +426,7 @@ export class DetailsRenderer {
   _computeEntityAggregations(items, headings) {
     // Exclude pre-aggregated and non-aggregatable audit results.
     // Eg. Third-party Summary audit has `.entity` as an Object
-    if (!items?.length || typeof(items[0].entity) !== 'string') {
+    if (!items.length || typeof items[0].entity !== 'string') {
       return [];
     }
 
@@ -491,20 +485,25 @@ export class DetailsRenderer {
     }
 
     const aggregations = this._computeEntityAggregations(details.items, details.headings);
-
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
     let even = true;
     if (aggregations.length) {
       for (const group of aggregations) {
-        const aggregateFragment = this._renderTableGroupRow(group, details.headings);
+        let entityName = '';
+        if (typeof group.entity === 'string') {
+          entityName = group.entity;
+        }
+        // Render the heading row
+        const aggregateFragment = this._renderTableRowsFromItem(group, details.headings);
         // Find all items that match the entity.
-        for (const item of details.items.filter((item) => item.entity === group.entity)) {
+        for (const item of details.items.filter((item) => item.entity === entityName)) {
           aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }
-        if (typeof(group.entity) === 'string') {
-          this._dom.findAll('tr', aggregateFragment).forEach(
-            row => (row.dataset.entity = group.entity?.toString()));
-        }
+        const allRowEls = this._dom.findAll('tr', aggregateFragment);
+        const firstRowEl = allRowEls[0];
+        firstRowEl.classList.add('lh-row--group');
+        allRowEls.forEach(row => row.dataset.entity = entityName);
+        this._adornTableRowWithEntityChips(firstRowEl);
         even = !even;
         tbodyElem.append(aggregateFragment);
       }
@@ -521,11 +520,18 @@ export class DetailsRenderer {
           entityName = item.entity;
         }
 
-        for (const rowEl of this._dom.findAll('tr', rowsFragment)) {
-          // For zebra styling.
-          rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
-          if (entityName && !rowEl.classList.contains('lh-sub-item-row')) {
-            rowEl.dataset.entity = entityName;
+        const allRowEls = this._dom.findAll('tr', rowsFragment);
+        const firstRowEl = allRowEls[0];
+        firstRowEl.dataset.entity = entityName;
+        if (entityName && item.subItems) {
+          // Infer an grouped row based on the presence of item.entity and having subItems.
+          firstRowEl.classList.add('lh-row--group');
+          this._adornTableRowWithEntityChips(firstRowEl);
+        }
+        else {
+          for (const rowEl of allRowEls) {
+            // For zebra styling.
+            rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
           }
         }
         even = !even;
