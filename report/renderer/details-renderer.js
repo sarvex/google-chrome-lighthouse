@@ -523,7 +523,7 @@ export class DetailsRenderer {
         const firstRowEl = allRowEls[0];
         firstRowEl.dataset.entity = entityName;
         if (entityName && item.subItems) {
-          // Infer an grouped row based on the presence of item.entity and having subItems.
+          // Infer a grouped row based on the presence of item.entity and having subItems.
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);
         }

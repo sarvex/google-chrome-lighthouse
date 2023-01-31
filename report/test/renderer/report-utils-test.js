@@ -98,7 +98,7 @@ describe('util helpers', () => {
       it('corrects underscored `notApplicable` scoreDisplayMode', () => {
         const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
 
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
@@ -121,7 +121,7 @@ describe('util helpers', () => {
       it('corrects undefined auditDetails.type to `debugdata`', () => {
         const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
 
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
@@ -144,7 +144,7 @@ describe('util helpers', () => {
       it('corrects `diagnostic` auditDetails.type to `debugdata`', () => {
         const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
 
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
@@ -167,7 +167,7 @@ describe('util helpers', () => {
       it('corrects screenshots in the `filmstrip` auditDetails.type', () => {
         const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
 
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
@@ -199,7 +199,7 @@ describe('util helpers', () => {
           },
         };
         delete clonedSampleResult.fullPageScreenshot;
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
@@ -237,7 +237,7 @@ describe('util helpers', () => {
       it('converts old opportunity table column headings to consolidated table headings', () => {
         const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
 
-        // Avoid injecting entity names into audits that would would
+        // Avoid injecting entity names into audits that would
         // make the diff at the end of this test difficult.
         delete clonedSampleResult.entities;
 
