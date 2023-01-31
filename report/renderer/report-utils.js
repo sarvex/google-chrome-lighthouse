@@ -539,11 +539,6 @@ const UIStrings = {
 
   /** This label is for a checkbox above a table of items loaded by a web page. The checkbox is used to show or hide third-party (or "3rd-party") resources in the table, where "third-party resources" refers to items loaded by a web page from URLs that aren't controlled by the owner of the web page. */
   thirdPartyResourcesLabel: 'Show 3rd-party resources',
-  /** This label is for a decorative chip that is included in a table row. The label indicates that the entity/company name indicated by the row belongs to the first-party (or "1st-party"). First-party label is used to hint resources that are directly controlled by the owner of the web page */
-  firstPartyChipLabel: '1st party',
-  /** Descriptive explanation in a tooltip form for a link to be opened in a new tab of the browser. */
-  openInANewTabTooltip: 'Open in a new tab',
-
   /** This label is for a button that opens a new tab to a webapp called "Treemap", which is a nested visual representation of a heierarchy of data related to the reports (script bytes and coverage, resource breakdown, etc.) */
   viewTreemapLabel: 'View Treemap',
   /** This label is for a button that will show the user a trace of the page. */
@@ -616,6 +611,10 @@ const UIStrings = {
   /** Label indicating that Lighthouse throttled the page using custom throttling settings. */
   runtimeCustom: 'Custom throttling',
 
+  /** This label is for a decorative chip that is included in a table row. The label indicates that the entity/company name indicated by the row belongs to the first-party (or "1st-party"). First-party label is used to hint resources that are directly controlled by the owner of the web page */
+  firstPartyChipLabel: '1st party',
+  /** Descriptive explanation in a tooltip form for a link to be opened in a new tab of the browser. */
+  openInANewTabTooltip: 'Open in a new tab',
   /** Generic category name for all resources that could not be attributed against a 1st or 3rd party entity. */
   unattributable: 'Unattributable',
 };
