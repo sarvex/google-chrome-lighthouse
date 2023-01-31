@@ -91,7 +91,11 @@ class ReportUtils {
         }
 
         // Attach table/opportunity items with entity information.
-        ReportUtils.classifyEntities(result.entities, audit);
+        if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
+          if (result.entities) {
+            ReportUtils.classifyEntities(result.entities, audit.details);
+          }
+        }
 
         // TODO: convert printf-style displayValue.
         // Added:   #5099, v3
@@ -194,7 +198,7 @@ class ReportUtils {
    * Given an audit's details, identify and return a URL locator function that
    * can be called later with an `item` to extract the URL of it.
    * @param {LH.FormattedIcu<LH.Audit.Details.TableColumnHeading[]>} headings
-   * @return {{(item: LH.FormattedIcu<LH.Audit.Details.TableItem>): string|undefined}=}
+   * @return {((item: LH.FormattedIcu<LH.Audit.Details.TableItem>) => string|undefined)=}
    */
   static getUrlLocatorFn(headings) {
     // The most common type, valueType=url.
@@ -224,17 +228,12 @@ class ReportUtils {
 
   /**
    * Mark TableItems/OpportunityItems with entity names.
-   * @param {LH.Result.Entities|undefined} entityClassification
-   * @param {import('../../types/lhr/audit-result').Result} audit
+   * @param {LH.Result.Entities} entityClassification
+   * @param {LH.FormattedIcu<LH.Audit.Details.Opportunity|LH.Audit.Details.Table>} details
    */
-  static classifyEntities(entityClassification, audit) {
-    if (!entityClassification) return;
-    if (audit.details?.type !== 'opportunity' && audit.details?.type !== 'table') {
-      return;
-    }
-
+  static classifyEntities(entityClassification, details) {
     // If details.items are already marked with entity attribute during an audit, nothing to do here.
-    const {items, headings} = audit.details;
+    const {items, headings} = details;
     if (!items.length || items.some(item => item.entity)) return;
 
     // Identify a URL-locator function that we could call against each item to get its URL.
