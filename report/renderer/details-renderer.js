@@ -25,6 +25,7 @@
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.ItemValue>} TableItemValue */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableColumnHeading>} TableColumnHeading */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableSortOrder>} TableSortOrder */
+/** @typedef {LH.FormattedIcu<LH.Audit.Details.Table | LH.Audit.Details.Opportunity>} TableLike */
 
 import {Util} from '../../shared/util.js';
 import {CriticalRequestChainRenderer} from './crc-details-renderer.js';
@@ -37,10 +38,7 @@ const URL_PREFIXES = ['http://', 'https://', 'data:'];
 export class DetailsRenderer {
   /**
    * @param {DOM} dom
-   * @param {{
-   *  fullPageScreenshot?: LH.Result.FullPageScreenshot,
-   *  entities?: LH.Result.Entities,
-   * }} [options]
+   * @param {{fullPageScreenshot?: LH.Result.FullPageScreenshot, entities?: LH.Result.Entities}} [options]
    */
   constructor(dom, options = {}) {
     this._dom = dom;
@@ -389,24 +387,23 @@ export class DetailsRenderer {
     const entityName = rowEl.dataset.entity;
     if (!entityName) return;
     const entityIndex = this._entities?.entityIndexByName[entityName];
+    if (entityIndex === undefined) return;
     /** @type {LH.Result.LhrEntity|undefined} */
-    let matchedEntity;
-    if (typeof entityIndex !== 'undefined') {
-      matchedEntity = this._entities?.list[entityIndex];
-    }
+    const matchedEntity = this._entities?.list[entityIndex];
+    const firstTdEl = this._dom.find('td', rowEl);
 
     if (matchedEntity?.category) {
       const categoryChipEl = this._dom.createElement('span');
       categoryChipEl.classList.add('lh-audit__adorn');
       categoryChipEl.textContent = matchedEntity.category;
-      rowEl.children[0]?.append(' ', categoryChipEl);
+      firstTdEl.append(' ', categoryChipEl);
     }
 
     if (matchedEntity?.isFirstParty) {
       const firstPartyChipEl = this._dom.createElement('span');
       firstPartyChipEl.classList.add('lh-audit__adorn', 'lh-audit__adorn1p');
       firstPartyChipEl.textContent = '1st party'; // TODO: i18n
-      rowEl.children[0]?.append(' ', firstPartyChipEl);
+      firstTdEl.append(' ', firstPartyChipEl);
     }
 
     if (matchedEntity?.homepage) {
@@ -415,26 +412,25 @@ export class DetailsRenderer {
       entityLinkEl.target = '_blank';
       entityLinkEl.title = 'Open link in a new tab'; // TOOD: i18n
       entityLinkEl.classList.add('lh-report-icon--external');
-      rowEl.children[0]?.append(' ', entityLinkEl);
+      firstTdEl.append(' ', entityLinkEl);
     }
   }
 
   /**
    * Computes aggregations and groups by entity from a list of TableItem's
-   * @param {{headings: TableColumnHeading[], items: TableItem[], sortBy?: TableSortOrder}} details
+   * @param {TableLike} details
    * @return {TableItem[]}
    */
   _computeEntityAggregations(details) {
     const {items, headings, sortBy} = details;
-    // Exclude pre-aggregated and non-aggregatable audit results.
-    // Eg. Third-party Summary audit has `.entity` as an Object
-    if (!items.length || typeof items[0].entity !== 'string') {
+    // Exclude pre-aggregated audit results.
+    // Eg. Third-party Summary comes pre-aggregated.
+    if (!items.length || details.isAggregated) {
       return [];
     }
 
     const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
-    /** @type {string[]} */
-    const aggregateKeys = [];
+    const /** @type {string[]} */ aggregateKeys = [];
     for (const heading of headings) {
       if (!heading.key || heading.dontAggregate) continue;
       if ('valueType' in heading && supportedAggregations.includes(heading.valueType)) {
@@ -443,14 +439,14 @@ export class DetailsRenderer {
     }
 
     // Grab the first column's key to group our entity link
-    const primaryKey = headings[0].key || '';
+    const primaryKey = headings[0].key;
+    if (!primaryKey) return [];
 
     /** @type {Map<string | undefined, TableItem>} */
     const byEntity = new Map();
     for (const item of items) {
       const entityName = typeof item.entity === 'string' ? item.entity : undefined;
-      /** @type {TableItem} */
-      const group = byEntity.get(entityName) || {
+      const /** @type {TableItem} */group = byEntity.get(entityName) || {
         [primaryKey]: {
           type: 'link',
           url: '',
@@ -472,7 +468,7 @@ export class DetailsRenderer {
   }
 
   /**
-   * @param {{headings: TableColumnHeading[], items: TableItem[], sortBy?: TableSortOrder}} details
+   * @param {TableLike} details
    * @return {Element}
    */
   _renderTable(details) {
@@ -498,7 +494,7 @@ export class DetailsRenderer {
         const entityName = typeof group.entity === 'string' ? group.entity : undefined;
         // Render the heading row
         const aggregateFragment = this._renderTableRowsFromItem(group, details.headings);
-        // Find all items that match the entity.
+        // Render all the items that match the heading row
         for (const item of details.items.filter((item) => item.entity === entityName)) {
           aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }

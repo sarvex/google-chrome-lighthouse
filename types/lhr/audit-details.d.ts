@@ -69,7 +69,10 @@ declare module Details {
     headings: TableColumnHeading[];
     items: OpportunityItem[];
     debugData?: DebugData;
+    /** Sort order of this opportunity */
     sortBy?: TableSortOrder;
+    /** Is this opportunity in aggregated form already? */
+    isAggregated?: boolean;
   }
 
   interface Screenshot {
@@ -97,7 +100,10 @@ declare module Details {
       wastedBytes?: number;
     };
     debugData?: DebugData;
+    /** Sort order of this table */
     sortBy?: TableSortOrder;
+    /** Is this table in aggregated form already? */
+    isAggregated?: boolean;
   }
 
   /** An array of sorting directives [key, direction] */

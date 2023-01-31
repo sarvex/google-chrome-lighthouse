@@ -106,7 +106,11 @@ class ReportUtils {
 
         // Attach table/opportunity items with entity information.
         if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
-          if (result.entities) {
+          // third-party-summary produces a per-entity aggregated result.
+          if (audit.id === 'third-party-summary') {
+            audit.details.isAggregated = true;
+          }
+          if (!audit.details.isAggregated && result.entities) {
             ReportUtils.classifyEntities(result.entities, audit.id, audit.details);
           }
         }
@@ -274,7 +278,8 @@ class ReportUtils {
 
     // If entity classification was successful, inject sort order of entities.
     // This information is static so we don't bloat LHR with it.
-    details.sortBy = ReportUtils.getEntitySortOrder(auditId);
+    const sortBy = ReportUtils.getEntitySortOrder(auditId);
+    if (sortBy) details.sortBy = sortBy;
   }
 
   /**
