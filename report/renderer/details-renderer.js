@@ -396,7 +396,7 @@ export class DetailsRenderer {
     if (matchedEntity?.category) {
       const categoryChipEl = this._dom.createElement('span');
       categoryChipEl.classList.add('lh-audit__adorn');
-      categoryChipEl.textContent = matchedEntity?.category.toString();
+      categoryChipEl.textContent = matchedEntity.category;
       rowEl.children[0]?.append(' ', categoryChipEl);
     }
 
@@ -409,7 +409,7 @@ export class DetailsRenderer {
 
     if (matchedEntity?.homepage) {
       const entityLinkEl = this._dom.createElement('a');
-      entityLinkEl.href = matchedEntity?.homepage;
+      entityLinkEl.href = matchedEntity.homepage;
       entityLinkEl.target = '_blank';
       entityLinkEl.title = 'Open link in a new tab'; // TOOD: i18n
       entityLinkEl.classList.add('lh-report-icon--external');
@@ -443,10 +443,10 @@ export class DetailsRenderer {
     // Grab the first column's key to group our entity link
     const primaryKey = headings[0].key || '';
 
-    /** @type {Map<string, TableItem>} */
+    /** @type {Map<string | undefined, TableItem>} */
     const byEntity = new Map();
     for (const item of items) {
-      const entityName = item.entity?.toString() || '';
+      const entityName = typeof item.entity === 'string' ? item.entity : undefined;
       /** @type {TableItem} */
       const group = byEntity.get(entityName) || {
         [primaryKey]: {
@@ -489,10 +489,7 @@ export class DetailsRenderer {
     let even = true;
     if (aggregations.length) {
       for (const group of aggregations) {
-        let entityName = '';
-        if (typeof group.entity === 'string') {
-          entityName = group.entity;
-        }
+        const entityName = typeof group.entity === 'string' ? group.entity : undefined;
         // Render the heading row
         const aggregateFragment = this._renderTableRowsFromItem(group, details.headings);
         // Find all items that match the entity.
@@ -502,8 +499,10 @@ export class DetailsRenderer {
         const allRowEls = this._dom.findAll('tr', aggregateFragment);
         const firstRowEl = allRowEls[0];
         firstRowEl.classList.add('lh-row--group');
-        allRowEls.forEach(row => row.dataset.entity = entityName);
-        this._adornTableRowWithEntityChips(firstRowEl);
+        if (entityName) {
+          allRowEls.forEach(row => row.dataset.entity = entityName);
+          this._adornTableRowWithEntityChips(firstRowEl);
+        }
         even = !even;
         tbodyElem.append(aggregateFragment);
       }
