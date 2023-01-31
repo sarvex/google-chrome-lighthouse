@@ -526,8 +526,7 @@ export class DetailsRenderer {
           // Infer a grouped row based on the presence of item.entity and having subItems.
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);
-        }
-        else {
+        } else {
           for (const rowEl of allRowEls) {
             // For zebra styling.
             rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
