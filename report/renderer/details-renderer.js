@@ -447,7 +447,7 @@ export class DetailsRenderer {
     const byEntity = new Map();
     for (const item of items) {
       const entityName = typeof item.entity === 'string' ? item.entity : undefined;
-      const /** @type {TableItem} */group = byEntity.get(entityName) || {
+      const group = byEntity.get(entityName) || {
         [primaryKey]: {
           type: 'link',
           url: '',
