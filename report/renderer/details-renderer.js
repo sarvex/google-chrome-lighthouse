@@ -385,32 +385,33 @@ export class DetailsRenderer {
    */
   _adornTableRowWithEntityChips(rowEl) {
     const entityName = rowEl.dataset.entity;
-    if (!entityName) return;
-    const entityIndex = this._entities?.entityIndexByName[entityName];
+    if (!this._entities || !entityName) return;
+    const entityIndex = this._entities.entityIndexByName[entityName];
     if (entityIndex === undefined) return;
     /** @type {LH.Result.LhrEntity|undefined} */
-    const matchedEntity = this._entities?.list[entityIndex];
+    const matchedEntity = this._entities.list[entityIndex];
+    if (!matchedEntity) return;
     const firstTdEl = this._dom.find('td', rowEl);
 
-    if (matchedEntity?.category) {
+    if (matchedEntity.category) {
       const categoryChipEl = this._dom.createElement('span');
       categoryChipEl.classList.add('lh-audit__adorn');
       categoryChipEl.textContent = matchedEntity.category;
       firstTdEl.append(' ', categoryChipEl);
     }
 
-    if (matchedEntity?.isFirstParty) {
+    if (matchedEntity.isFirstParty) {
       const firstPartyChipEl = this._dom.createElement('span');
       firstPartyChipEl.classList.add('lh-audit__adorn', 'lh-audit__adorn1p');
-      firstPartyChipEl.textContent = '1st party'; // TODO: i18n
+      firstPartyChipEl.textContent = Globals.strings.firstPartyChipLabel;
       firstTdEl.append(' ', firstPartyChipEl);
     }
 
-    if (matchedEntity?.homepage) {
+    if (matchedEntity.homepage) {
       const entityLinkEl = this._dom.createElement('a');
       entityLinkEl.href = matchedEntity.homepage;
       entityLinkEl.target = '_blank';
-      entityLinkEl.title = 'Open link in a new tab'; // TOOD: i18n
+      entityLinkEl.title = Globals.strings.openInANewTabTooltip;
       entityLinkEl.classList.add('lh-report-icon--external');
       firstTdEl.append(' ', entityLinkEl);
     }
@@ -450,7 +451,7 @@ export class DetailsRenderer {
         [primaryKey]: {
           type: 'link',
           url: '',
-          text: entityName || 'Unattributable', // TODO: i18n
+          text: entityName || Globals.strings.unattributable,
         },
         entity: entityName,
       };
