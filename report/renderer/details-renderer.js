@@ -24,11 +24,13 @@
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableItem>} TableItem */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.ItemValue>} TableItemValue */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableColumnHeading>} TableColumnHeading */
+/** @typedef {LH.FormattedIcu<LH.Audit.Details.TableSortOrder>} TableSortOrder */
 
 import {Util} from '../../shared/util.js';
 import {CriticalRequestChainRenderer} from './crc-details-renderer.js';
 import {ElementScreenshotRenderer} from './element-screenshot-renderer.js';
 import {Globals} from './report-globals.js';
+import {ReportUtils} from './report-utils.js';
 
 const URL_PREFIXES = ['http://', 'https://', 'data:'];
 
@@ -419,11 +421,11 @@ export class DetailsRenderer {
 
   /**
    * Computes aggregations and groups by entity from a list of TableItem's
-   * @param {TableItem[]} items
-   * @param {TableColumnHeading[]} headings
+   * @param {{headings: TableColumnHeading[], items: TableItem[], sortBy?: TableSortOrder}} details
    * @return {TableItem[]}
    */
-  _computeEntityAggregations(items, headings) {
+  _computeEntityAggregations(details) {
+    const {items, headings, sortBy} = details;
     // Exclude pre-aggregated and non-aggregatable audit results.
     // Eg. Third-party Summary audit has `.entity` as an Object
     if (!items.length || typeof items[0].entity !== 'string') {
@@ -462,11 +464,15 @@ export class DetailsRenderer {
       byEntity.set(entityName, group);
     }
 
-    return [...byEntity.values()];
+    const result = [...byEntity.values()];
+    if (sortBy) {
+      result.sort(ReportUtils._getTableItemSortComparator(sortBy));
+    }
+    return result;
   }
 
   /**
-   * @param {{headings: TableColumnHeading[], items: TableItem[]}} details
+   * @param {{headings: TableColumnHeading[], items: TableItem[], sortBy?: TableSortOrder}} details
    * @return {Element}
    */
   _renderTable(details) {
@@ -484,7 +490,7 @@ export class DetailsRenderer {
       this._dom.createChildOf(theadTrElem, 'th', classes).append(labelEl);
     }
 
-    const aggregations = this._computeEntityAggregations(details.items, details.headings);
+    const aggregations = this._computeEntityAggregations(details);
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
     let even = true;
     if (aggregations.length) {

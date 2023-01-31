@@ -69,6 +69,7 @@ declare module Details {
     headings: TableColumnHeading[];
     items: OpportunityItem[];
     debugData?: DebugData;
+    sortBy?: TableSortOrder;
   }
 
   interface Screenshot {
@@ -96,7 +97,11 @@ declare module Details {
       wastedBytes?: number;
     };
     debugData?: DebugData;
+    sortBy?: TableSortOrder;
   }
+
+  /** An array of sorting directives [key, direction] */
+  type TableSortOrder = Array<[string /* TableColumnHeading.key */, ('asc' | 'desc')]>;
 
   /** A table item for rows that are nested within a top-level TableItem (row). */
   interface TableSubItems {
