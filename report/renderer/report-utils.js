@@ -97,9 +97,7 @@ class ReportUtils {
             if (headings[0].valueType === 'link') {
               headings[0].valueType = 'text';
               for (const item of items) {
-                // @ts-expect-error
                 if (typeof item.entity === 'object' && item.entity.type === 'link') {
-                  // @ts-expect-error
                   item.entity = item.entity.text;
                 }
               }

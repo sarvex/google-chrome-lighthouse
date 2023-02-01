@@ -133,7 +133,7 @@ declare module Details {
   type ItemValueType = 'bytes' | 'code' | 'link' | 'ms' | 'multi' | 'node' | 'source-location' | 'numeric' | 'text' | 'thumbnail' | 'timespanMs' | 'url';
 
   /** Possible types of values found within table items. */
-  type ItemValue = string | number | boolean | DebugData | NodeValue | SourceLocationValue | UrlValue | CodeValue | NumericValue | IcuMessage | TableSubItems;
+  type ItemValue = string | number | boolean | DebugData | NodeValue | SourceLocationValue | LinkValue | UrlValue | CodeValue | NumericValue | IcuMessage | TableSubItems;
 
   interface TableColumnHeading {
     /**
@@ -187,6 +187,17 @@ declare module Details {
   interface CodeValue {
     type: 'code';
     value: IcuMessage | string;
+  }
+
+  /**
+   * A value used within a details object, intended to be displayed as a
+   * link with text, regardless of the controlling heading's valueType.
+   * If URL is the empty string, fallsback to a basic `TextValue`.
+   */
+  interface LinkValue {
+    type: 'link',
+    text: string;
+    url: string;
   }
 
   /**
