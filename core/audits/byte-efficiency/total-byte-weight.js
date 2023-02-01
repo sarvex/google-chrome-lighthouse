@@ -93,8 +93,7 @@ class TotalByteWeight extends Audit {
       {key: 'totalBytes', valueType: 'bytes', label: str_(i18n.UIStrings.columnTransferSize)},
     ];
 
-    const tableDetails = Audit.makeTableDetails(headings, results,
-      undefined, ['totalBytes']);
+    const tableDetails = Audit.makeTableDetails(headings, results, undefined, ['totalBytes']);
 
     return {
       score,
