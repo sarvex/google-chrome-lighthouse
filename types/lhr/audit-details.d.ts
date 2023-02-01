@@ -100,9 +100,9 @@ declare module Details {
       wastedBytes?: number;
     };
     debugData?: DebugData;
-    /** Sort order of this table */
+    /** Array of keys that the table is sorted by. Keys earlier in the list will have a higher sort precedence. */
     sortedBy?: TableSortOrder;
-    /** Is this table in aggregated form already? */
+    /** Will be true if the table is in aggregated form already. */
     isAggregated?: boolean;
   }
 

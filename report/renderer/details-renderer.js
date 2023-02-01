@@ -454,7 +454,8 @@ export class DetailsRenderer {
     }
 
     const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
-    const /** @type {string[]} */ aggregateKeys = [];
+    /** @type {string[]} */
+    const aggregateKeys = [];
     for (const heading of headings) {
       if (!heading.key || heading.noAggregation) continue;
       if ('valueType' in heading && supportedAggregations.includes(heading.valueType)) {

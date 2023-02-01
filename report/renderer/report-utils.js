@@ -465,11 +465,11 @@ const UIStrings = {
   /** Label indicating that Lighthouse throttled the page using custom throttling settings. */
   runtimeCustom: 'Custom throttling',
 
-  /** This label is for a decorative chip that is included in a table row. The label indicates that the entity/company name indicated by the row belongs to the first-party (or "1st-party"). First-party label is used to hint resources that are directly controlled by the owner of the web page */
+  /** This label is for a decorative chip that is included in a table row. The label indicates that the entity/company name in the row belongs to the first-party (or "1st-party"). First-party label is used to identify resources that are directly controlled by the owner of the web page. */
   firstPartyChipLabel: '1st party',
   /** Descriptive explanation in a tooltip form for a link to be opened in a new tab of the browser. */
   openInANewTabTooltip: 'Open in a new tab',
-  /** Generic category name for all resources that could not be attributed against a 1st or 3rd party entity. */
+  /** Generic category name for all resources that could not be attributed to a 1st or 3rd party entity. */
   unattributable: 'Unattributable',
 };
 
