@@ -83,6 +83,7 @@ Object {
             },
           },
         ],
+        "sortedBy": undefined,
         "summary": undefined,
         "type": "table",
       },
@@ -214,6 +215,9 @@ Object {
             },
             "total": 285,
           },
+        ],
+        "sortedBy": Array [
+          "total",
         ],
         "summary": undefined,
         "type": "table",
