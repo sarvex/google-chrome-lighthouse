@@ -508,7 +508,6 @@ export class DetailsRenderer {
 
     const aggregations = this._computeEntityAggregations(details);
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
-    let even = true;
     if (aggregations.length) {
       for (const aggRow of aggregations) {
         const entityName = typeof aggRow.entity === 'string' ? aggRow.entity : undefined;
@@ -525,10 +524,10 @@ export class DetailsRenderer {
           allRowEls.forEach(row => row.dataset.entity = entityName);
           this._adornTableRowWithEntityChips(firstRowEl);
         }
-        even = !even;
         tbodyElem.append(aggregateFragment);
       }
     } else {
+      let even = true;
       for (const item of details.items) {
         const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
         const entityName = typeof item.entity === 'string' ? item.entity : undefined;
