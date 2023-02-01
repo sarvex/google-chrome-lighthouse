@@ -146,11 +146,11 @@ class ReportUtils {
   }
 
   /**
-   * Returns a comparator created from supplied TableSortOrder
-   * @param {LH.Audit.Details.TableSortOrder} sortedBy
+   * Returns a comparator created from the supplied list of keys
+   * @param {Array<string>} sortedBy
    * @return {((a: LH.Audit.Details.TableItem, b: LH.Audit.Details.TableItem) => number)}
    */
-  static _getTableItemSortComparator(sortedBy) {
+  static getTableItemSortComparator(sortedBy) {
     return (a, b) => {
       for (const key of sortedBy) {
         const aVal = a[key];

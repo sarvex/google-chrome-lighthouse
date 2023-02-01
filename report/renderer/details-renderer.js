@@ -483,7 +483,7 @@ export class DetailsRenderer {
 
     const result = [...byEntity.values()];
     if (sortedBy) {
-      result.sort(ReportUtils._getTableItemSortComparator(sortedBy));
+      result.sort(ReportUtils.getTableItemSortComparator(sortedBy));
     }
     return result;
   }

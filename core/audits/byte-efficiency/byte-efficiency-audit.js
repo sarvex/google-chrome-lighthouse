@@ -29,7 +29,7 @@ const WASTED_MS_FOR_SCORE_OF_ZERO = 5000;
  * @property {LH.IcuMessage} [displayValue]
  * @property {LH.IcuMessage} [explanation]
  * @property {Array<string | LH.IcuMessage>} [warnings]
- * @property {LH.Audit.Details.TableSortOrder} [sortedBy]
+ * @property {Array<string>} [sortedBy]
  */
 
 /**

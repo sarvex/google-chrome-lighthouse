@@ -273,6 +273,8 @@ export class ReportUIFeatures {
         }
       });
 
+      // thirdPartyRowEls contains both heading and item rows.
+      // Filter out heading rows to get third party resource count.
       const thirdPartyResourceCount = thirdPartyRowEls.filter(
         rowEl => !rowEl.classList.contains('lh-row--group')).length;
       this._dom.find('.lh-3p-filter-count', filterTemplate).textContent =

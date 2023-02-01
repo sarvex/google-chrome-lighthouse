@@ -70,7 +70,7 @@ declare module Details {
     items: OpportunityItem[];
     debugData?: DebugData;
     /** Sort order of this opportunity */
-    sortedBy?: TableSortOrder;
+    sortedBy?: Array<string>;
     /** Is this opportunity in aggregated form already? */
     isAggregated?: boolean;
   }
@@ -101,13 +101,10 @@ declare module Details {
     };
     debugData?: DebugData;
     /** Array of keys that the table is sorted by. Keys earlier in the list will have a higher sort precedence. */
-    sortedBy?: TableSortOrder;
+    sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
     isAggregated?: boolean;
   }
-
-  /** An array of column keys by which a table/opportunity is sorted */
-  type TableSortOrder = Array</* TableColumnHeading.key */ string>;
 
   /** A table item for rows that are nested within a top-level TableItem (row). */
   interface TableSubItems {
