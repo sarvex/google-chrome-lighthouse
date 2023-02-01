@@ -1531,7 +1531,7 @@
   font-weight: normal;
 }
 
-.lh-row--group .lh-link {
+.lh-row--group .lh-text {
   color: inherit;
   text-decoration: none;
   display: inline-block;

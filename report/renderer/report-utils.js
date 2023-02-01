@@ -90,6 +90,24 @@ class ReportUtils {
           }
         }
 
+        // In 10.0, third-party-summary deprecated entity: LinkValue and switched to entity name
+        if (audit.id === 'third-party-summary') {
+          if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
+            const {headings, items} = audit.details;
+            if (headings[0].valueType === 'link') {
+              headings[0].valueType = 'text';
+              for (const item of items) {
+                // @ts-expect-error
+                if (typeof item.entity === 'object' && item.entity.type === 'link') {
+                  // @ts-expect-error
+                  item.entity = item.entity.text;
+                }
+              }
+            }
+            audit.details.isAggregated = true;
+          }
+        }
+
         // Attach table/opportunity items with entity information.
         if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
           if (!audit.details.isAggregated && result.entities) {

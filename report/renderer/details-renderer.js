@@ -380,17 +380,27 @@ export class DetailsRenderer {
   }
 
   /**
+   * Grab a matching entity from classification by its name
+   * @param {string} name
+   * @return {LH.Result.LhrEntity|undefined}
+   */
+  _getEntityByName(name) {
+    if (!this._entities) return;
+    const entityIndex = this._entities.entityIndexByName[name];
+    if (entityIndex === undefined) return;
+    return this._entities.list[entityIndex];
+  }
+
+  /**
    * Adorn a table row element with entity chips based on [data-entity] attribute.
    * @param {HTMLTableRowElement} rowEl
    */
   _adornTableRowWithEntityChips(rowEl) {
     const entityName = rowEl.dataset.entity;
-    if (!this._entities || !entityName) return;
-    const entityIndex = this._entities.entityIndexByName[entityName];
-    if (entityIndex === undefined) return;
-    /** @type {LH.Result.LhrEntity|undefined} */
-    const matchedEntity = this._entities.list[entityIndex];
+    if (!entityName) return;
+    const matchedEntity = this._getEntityByName(entityName);
     if (!matchedEntity) return;
+
     const firstTdEl = this._dom.find('td', rowEl);
 
     if (matchedEntity.category) {
@@ -418,7 +428,21 @@ export class DetailsRenderer {
   }
 
   /**
-   * Computes aggregations and groups by entity from a list of TableItem's
+   * Renders an aggregated row.
+   * @param {TableItem} item
+   * @param {LH.Audit.Details.TableColumnHeading[]} headings
+   */
+  _renderTableAggregatedRowFromItem(item, headings) {
+    const entityColumnHeading = {...headings[0]};
+    entityColumnHeading.valueType = 'text';
+    const aggregateRowHeadings = [entityColumnHeading, ...headings.slice(1)];
+    const fragment = this._dom.createFragment();
+    fragment.append(this._renderTableRow(item, aggregateRowHeadings));
+    return fragment;
+  }
+
+  /**
+   * Computes aggregations and aggRows by entity from a list of TableItem's
    * @param {TableLike} details
    * @return {TableItem[]}
    */
@@ -439,7 +463,7 @@ export class DetailsRenderer {
       }
     }
 
-    // Grab the first column's key to group our entity link
+    // Grab the first column's key to aggregate by entity
     const primaryKey = headings[0].key;
     if (!primaryKey) return [];
 
@@ -447,18 +471,14 @@ export class DetailsRenderer {
     const byEntity = new Map();
     for (const item of items) {
       const entityName = typeof item.entity === 'string' ? item.entity : undefined;
-      const group = byEntity.get(entityName) || {
-        [primaryKey]: {
-          type: 'link',
-          url: '',
-          text: entityName || Globals.strings.unattributable,
-        },
+      const aggregate = byEntity.get(entityName) || {
+        [primaryKey]: entityName || Globals.strings.unattributable,
         entity: entityName,
       };
       for (const key of aggregateKeys) {
-        group[key] = Number(group[key] || 0) + Number(item[key]);
+        aggregate[key] = Number(aggregate[key] || 0) + Number(item[key]);
       }
-      byEntity.set(entityName, group);
+      byEntity.set(entityName, aggregate);
     }
 
     const result = [...byEntity.values()];
@@ -491,10 +511,10 @@ export class DetailsRenderer {
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
     let even = true;
     if (aggregations.length) {
-      for (const group of aggregations) {
-        const entityName = typeof group.entity === 'string' ? group.entity : undefined;
+      for (const aggRow of aggregations) {
+        const entityName = typeof aggRow.entity === 'string' ? aggRow.entity : undefined;
         // Render the heading row
-        const aggregateFragment = this._renderTableRowsFromItem(group, details.headings);
+        const aggregateFragment = this._renderTableAggregatedRowFromItem(aggRow, details.headings);
         // Render all the items that match the heading row
         for (const item of details.items.filter((item) => item.entity === entityName)) {
           aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
@@ -512,21 +532,11 @@ export class DetailsRenderer {
     } else {
       for (const item of details.items) {
         const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
-
-        // The attribute item.entity could be a string (entity-classification), or
-        // a LinkValue for ThirdPartySummary audit.
-        let entityName;
-        if (typeof item.entity === 'object' && item.entity.type === 'link') {
-          entityName = item.entity.text;
-        } else if (typeof item.entity === 'string') {
-          entityName = item.entity;
-        }
-
+        const entityName = typeof item.entity === 'string' ? item.entity : undefined;
         const allRowEls = this._dom.findAll('tr', rowsFragment);
         const firstRowEl = allRowEls[0];
         firstRowEl.dataset.entity = entityName;
-        if (entityName && item.subItems) {
-          // Infer a grouped row based on the presence of item.entity and having subItems.
+        if (details.isAggregated) {
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);
         } else {
