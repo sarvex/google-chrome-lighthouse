@@ -24,7 +24,6 @@
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableItem>} TableItem */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.ItemValue>} TableItemValue */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.TableColumnHeading>} TableColumnHeading */
-/** @typedef {LH.FormattedIcu<LH.Audit.Details.TableSortOrder>} TableSortOrder */
 /** @typedef {LH.FormattedIcu<LH.Audit.Details.Table | LH.Audit.Details.Opportunity>} TableLike */
 
 import {Util} from '../../shared/util.js';
@@ -447,7 +446,7 @@ export class DetailsRenderer {
    * @return {TableItem[]}
    */
   _computeEntityAggregations(details) {
-    const {items, headings, sortBy} = details;
+    const {items, headings, sortedBy} = details;
     // Exclude pre-aggregated audits and results without entity classification.
     // Eg. Third-party Summary comes pre-aggregated.
     if (!items.length || details.isAggregated || !items.some(item => item.entity)) {
@@ -482,8 +481,8 @@ export class DetailsRenderer {
     }
 
     const result = [...byEntity.values()];
-    if (sortBy) {
-      result.sort(ReportUtils._getTableItemSortComparator(sortBy));
+    if (sortedBy) {
+      result.sort(ReportUtils._getTableItemSortComparator(sortedBy));
     }
     return result;
   }

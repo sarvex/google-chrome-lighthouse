@@ -73,7 +73,7 @@ class NetworkServerLatency extends Audit {
     ];
 
     const tableDetails = Audit.makeTableDetails(headings, results, undefined,
-      [['serverResponseTime']]);
+      ['serverResponseTime']);
 
     return {
       score: Math.max(1 - (maxLatency / 500), 0),

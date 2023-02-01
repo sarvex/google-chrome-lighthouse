@@ -534,10 +534,8 @@
                   "duration": 25.208000000000006
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -600,10 +598,8 @@
               "summary": {
                 "wastedMs": 288.41200000000015
               },
-              "sortBy": [
-                [
-                  "total"
-                ]
+              "sortedBy": [
+                "total"
               ]
             }
           },
@@ -635,10 +631,8 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "sortBy": [
-                [
-                  "wastedMs"
-                ]
+              "sortedBy": [
+                "wastedMs"
               ]
             }
           },
@@ -1151,10 +1145,8 @@
                   "rtt": 3.406000000000006
                 }
               ],
-              "sortBy": [
-                [
-                  "rtt"
-                ]
+              "sortedBy": [
+                "rtt"
               ]
             }
           },
@@ -1200,10 +1192,8 @@
                   "serverResponseTime": 3.7920000000000016
                 }
               ],
-              "sortBy": [
-                [
-                  "serverResponseTime"
-                ]
+              "sortedBy": [
+                "serverResponseTime"
               ]
             }
           },
@@ -1738,10 +1728,8 @@
                   "startTime": 965.8119999999999
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -1870,10 +1858,8 @@
                 }
               ],
               "overallSavingsMs": 0,
-              "sortBy": [
-                [
-                  "wastedMs"
-                ]
+              "sortedBy": [
+                "wastedMs"
               ],
               "debugData": {
                 "type": "debugdata",
@@ -2599,10 +2585,8 @@
                   "totalBytes": 4994
                 }
               ],
-              "sortBy": [
-                [
-                  "totalBytes"
-                ]
+              "sortedBy": [
+                "totalBytes"
               ]
             }
           },
@@ -2622,10 +2606,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2659,10 +2641,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2682,10 +2662,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2704,10 +2682,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2726,10 +2702,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2749,10 +2723,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2772,10 +2744,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2794,10 +2764,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2816,10 +2784,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2838,10 +2804,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2860,10 +2824,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -2926,10 +2888,8 @@
               ],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 57,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -7999,10 +7959,8 @@
                   "duration": 1.264
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -8065,10 +8023,8 @@
               "summary": {
                 "wastedMs": 352.6489999999996
               },
-              "sortBy": [
-                [
-                  "total"
-                ]
+              "sortedBy": [
+                "total"
               ]
             }
           },
@@ -8431,10 +8387,8 @@
                   "rtt": 5.454999999999998
                 }
               ],
-              "sortBy": [
-                [
-                  "rtt"
-                ]
+              "sortedBy": [
+                "rtt"
               ]
             }
           },
@@ -8476,10 +8430,8 @@
                   "serverResponseTime": 0
                 }
               ],
-              "sortBy": [
-                [
-                  "serverResponseTime"
-                ]
+              "sortedBy": [
+                "serverResponseTime"
               ]
             }
           },
@@ -8858,10 +8810,8 @@
                   "startTime": 1903.231
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -9111,10 +9061,8 @@
               "summary": {
                 "wastedBytes": 21491.399999999998
               },
-              "sortBy": [
-                [
-                  "totalBytes"
-                ]
+              "sortedBy": [
+                "totalBytes"
               ]
             }
           },
@@ -9183,10 +9131,8 @@
                   "totalBytes": 3142
                 }
               ],
-              "sortBy": [
-                [
-                  "totalBytes"
-                ]
+              "sortedBy": [
+                "totalBytes"
               ]
             }
           },
@@ -9205,10 +9151,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9228,10 +9172,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9250,10 +9192,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9272,10 +9212,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9295,10 +9233,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9318,10 +9254,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9340,10 +9274,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9362,10 +9294,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9384,10 +9314,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9406,10 +9334,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9428,10 +9354,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -9636,10 +9560,8 @@
                       }
                     }
                   ],
-                  "sortBy": [
-                    [
-                      "total"
-                    ]
+                  "sortedBy": [
+                    "total"
                   ]
                 },
                 {
@@ -16560,10 +16482,8 @@
                   "duration": 14.543999999999997
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -16632,10 +16552,8 @@
               "summary": {
                 "wastedMs": 169.10399999999998
               },
-              "sortBy": [
-                [
-                  "total"
-                ]
+              "sortedBy": [
+                "total"
               ]
             }
           },
@@ -16667,10 +16585,8 @@
               "headings": [],
               "items": [],
               "overallSavingsMs": 0,
-              "sortBy": [
-                [
-                  "wastedMs"
-                ]
+              "sortedBy": [
+                "wastedMs"
               ]
             }
           },
@@ -17153,10 +17069,8 @@
                   "rtt": 0.003
                 }
               ],
-              "sortBy": [
-                [
-                  "rtt"
-                ]
+              "sortedBy": [
+                "rtt"
               ]
             }
           },
@@ -17202,10 +17116,8 @@
                   "serverResponseTime": 0.874
                 }
               ],
-              "sortBy": [
-                [
-                  "serverResponseTime"
-                ]
+              "sortedBy": [
+                "serverResponseTime"
               ]
             }
           },
@@ -17605,10 +17517,8 @@
                   "startTime": 752.7026
                 }
               ],
-              "sortBy": [
-                [
-                  "duration"
-                ]
+              "sortedBy": [
+                "duration"
               ]
             }
           },
@@ -17756,10 +17666,8 @@
                 }
               ],
               "overallSavingsMs": 0,
-              "sortBy": [
-                [
-                  "wastedMs"
-                ]
+              "sortedBy": [
+                "wastedMs"
               ],
               "debugData": {
                 "type": "debugdata",
@@ -18502,10 +18410,8 @@
                   "totalBytes": 44
                 }
               ],
-              "sortBy": [
-                [
-                  "totalBytes"
-                ]
+              "sortedBy": [
+                "totalBytes"
               ]
             }
           },
@@ -18525,10 +18431,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18562,10 +18466,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18585,10 +18487,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18607,10 +18507,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18629,10 +18527,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18698,10 +18594,8 @@
               ],
               "overallSavingsMs": 300,
               "overallSavingsBytes": 68889.75,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18721,10 +18615,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18743,10 +18635,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18809,10 +18699,8 @@
               ],
               "overallSavingsMs": 300,
               "overallSavingsBytes": 52102,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18831,10 +18719,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18853,10 +18739,8 @@
               "items": [],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },
@@ -18919,10 +18803,8 @@
               ],
               "overallSavingsMs": 0,
               "overallSavingsBytes": 0,
-              "sortBy": [
-                [
-                  "wastedBytes"
-                ]
+              "sortedBy": [
+                "wastedBytes"
               ]
             }
           },

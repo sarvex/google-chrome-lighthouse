@@ -94,7 +94,7 @@ class TotalByteWeight extends Audit {
     ];
 
     const tableDetails = Audit.makeTableDetails(headings, results,
-      undefined, [['totalBytes']]);
+      undefined, ['totalBytes']);
 
     return {
       score,

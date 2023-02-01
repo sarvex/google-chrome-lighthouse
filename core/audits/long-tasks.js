@@ -106,7 +106,7 @@ class LongTasks extends Audit {
     ];
 
     const tableDetails = Audit.makeTableDetails(headings, results,
-        undefined, [['duration']]);
+        undefined, ['duration']);
 
     let displayValue;
     if (results.length > 0) {

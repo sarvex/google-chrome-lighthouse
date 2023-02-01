@@ -74,7 +74,7 @@ class NetworkRTT extends Audit {
     ];
 
     const tableDetails = Audit.makeTableDetails(headings, results,
-      undefined, [['rtt']]);
+      undefined, ['rtt']);
 
     return {
       score: 1,

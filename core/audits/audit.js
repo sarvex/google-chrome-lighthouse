@@ -124,10 +124,10 @@ class Audit {
    * @param {LH.Audit.Details.Table['headings']} headings
    * @param {LH.Audit.Details.Table['items']} results
    * @param {LH.Audit.Details.Table['summary']=} summary
-   * @param {LH.Audit.Details.Table['sortBy']=} sortBy
+   * @param {LH.Audit.Details.Table['sortedBy']=} sortedBy
    * @return {LH.Audit.Details.Table}
    */
-  static makeTableDetails(headings, results, summary, sortBy) {
+  static makeTableDetails(headings, results, summary, sortedBy) {
     if (results.length === 0) {
       return {
         type: 'table',
@@ -144,7 +144,7 @@ class Audit {
       headings: headings,
       items: results,
       summary,
-      sortBy,
+      sortedBy,
     };
   }
 
@@ -219,10 +219,10 @@ class Audit {
    * @param {LH.Audit.Details.Opportunity['items']} items
    * @param {number} overallSavingsMs
    * @param {number=} overallSavingsBytes
-   * @param {LH.Audit.Details.Opportunity['sortBy']=} sortBy
+   * @param {LH.Audit.Details.Opportunity['sortedBy']=} sortedBy
    * @return {LH.Audit.Details.Opportunity}
    */
-  static makeOpportunityDetails(headings, items, overallSavingsMs, overallSavingsBytes, sortBy) {
+  static makeOpportunityDetails(headings, items, overallSavingsMs, overallSavingsBytes, sortedBy) {
     Audit.assertHeadingKeysExist(headings, items);
 
     return {
@@ -231,7 +231,7 @@ class Audit {
       items,
       overallSavingsMs,
       overallSavingsBytes,
-      sortBy,
+      sortedBy,
     };
   }
 

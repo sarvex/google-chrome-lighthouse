@@ -1084,10 +1084,8 @@
             "duration": 16.858999999999998
           }
         ],
-        "sortBy": [
-          [
-            "duration"
-          ]
+        "sortedBy": [
+          "duration"
         ]
       }
     },
@@ -1150,10 +1148,8 @@
         "summary": {
           "wastedMs": 1324.3129999999999
         },
-        "sortBy": [
-          [
-            "total"
-          ]
+        "sortedBy": [
+          "total"
         ]
       }
     },
@@ -1185,10 +1181,8 @@
         "headings": [],
         "items": [],
         "overallSavingsMs": 0,
-        "sortBy": [
-          [
-            "wastedMs"
-          ]
+        "sortedBy": [
+          "wastedMs"
         ]
       }
     },
@@ -1745,10 +1739,8 @@
             "rtt": 0.20899999999999996
           }
         ],
-        "sortBy": [
-          [
-            "rtt"
-          ]
+        "sortedBy": [
+          "rtt"
         ]
       }
     },
@@ -1786,10 +1778,8 @@
             "serverResponseTime": 556.128
           }
         ],
-        "sortBy": [
-          [
-            "serverResponseTime"
-          ]
+        "sortedBy": [
+          "serverResponseTime"
         ]
       }
     },
@@ -2054,10 +2044,8 @@
             "transferSize": 0
           }
         ],
-        "sortBy": [
-          [
-            "sizeOverBudget"
-          ]
+        "sortedBy": [
+          "sizeOverBudget"
         ]
       }
     },
@@ -2112,10 +2100,8 @@
             "overBudget": 1075
           }
         ],
-        "sortBy": [
-          [
-            "overBudget"
-          ]
+        "sortedBy": [
+          "overBudget"
         ]
       }
     },
@@ -2481,10 +2467,8 @@
             "startTime": 8044.755
           }
         ],
-        "sortBy": [
-          [
-            "duration"
-          ]
+        "sortedBy": [
+          "duration"
         ]
       }
     },
@@ -2701,10 +2685,8 @@
           }
         ],
         "overallSavingsMs": 0,
-        "sortBy": [
-          [
-            "wastedMs"
-          ]
+        "sortedBy": [
+          "wastedMs"
         ],
         "debugData": {
           "type": "debugdata",
@@ -3962,10 +3944,8 @@
         "summary": {
           "wastedBytes": 1282879
         },
-        "sortBy": [
-          [
-            "totalBytes"
-          ]
+        "sortedBy": [
+          "totalBytes"
         ]
       }
     },
@@ -4034,10 +4014,8 @@
             "totalBytes": 24822
           }
         ],
-        "sortBy": [
-          [
-            "totalBytes"
-          ]
+        "sortedBy": [
+          "totalBytes"
         ]
       }
     },
@@ -4057,10 +4035,8 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4142,10 +4118,8 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4188,10 +4162,8 @@
         ],
         "overallSavingsMs": 750,
         "overallSavingsBytes": 83568,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4210,10 +4182,8 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4271,10 +4241,8 @@
         ],
         "overallSavingsMs": 600,
         "overallSavingsBytes": 65111,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4460,10 +4428,8 @@
         ],
         "overallSavingsMs": 450,
         "overallSavingsBytes": 77874.3,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4483,10 +4449,8 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4532,10 +4496,8 @@
         ],
         "overallSavingsMs": 1950,
         "overallSavingsBytes": 146478,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4642,10 +4604,8 @@
         ],
         "overallSavingsMs": 300,
         "overallSavingsBytes": 50519,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4686,10 +4646,8 @@
         ],
         "overallSavingsMs": 3300,
         "overallSavingsBytes": 682028,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4708,10 +4666,8 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },
@@ -4784,10 +4740,8 @@
         ],
         "overallSavingsMs": 150,
         "overallSavingsBytes": 21189,
-        "sortBy": [
-          [
-            "wastedBytes"
-          ]
+        "sortedBy": [
+          "wastedBytes"
         ]
       }
     },

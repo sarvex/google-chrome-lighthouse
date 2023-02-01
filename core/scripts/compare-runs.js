@@ -386,18 +386,18 @@ function compare() {
     };
   });
 
-  const sortByKey = `${argv.deltaPropertySort} Δ`;
+  const sortedByKey = `${argv.deltaPropertySort} Δ`;
   results.sort((a, b) => {
     // @ts-expect-error - shhh tsc.
-    let aValue = a[sortByKey];
+    let aValue = a[sortedByKey];
     // @ts-expect-error - shhh tsc.
-    let bValue = b[sortByKey];
+    let bValue = b[sortedByKey];
 
     // Always put the keys missing a result at the bottom of the table.
     if (!isNumber(aValue)) return 1;
     else if (!isNumber(bValue)) return -1;
 
-    if (argv.sortByAbsoluteValue) {
+    if (argv.sortedByAbsoluteValue) {
       aValue = Math.abs(aValue);
       bValue = Math.abs(bValue);
     }

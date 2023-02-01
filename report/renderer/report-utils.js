@@ -278,19 +278,19 @@ class ReportUtils {
 
   /**
    * Returns a comparator created from supplied TableSortOrder
-   * @param {LH.Audit.Details.TableSortOrder} sortBy
+   * @param {LH.Audit.Details.TableSortOrder} sortedBy
    * @return {((a: LH.Audit.Details.TableItem, b: LH.Audit.Details.TableItem) => number)}
    */
-  static _getTableItemSortComparator(sortBy) {
+  static _getTableItemSortComparator(sortedBy) {
     return (a, b) => {
-      for (const [key, order] of sortBy) {
+      for (const key of sortedBy) {
         const aVal = a[key];
         const bVal = b[key];
         if (typeof aVal === 'number' && typeof bVal === 'number' && aVal !== bVal) {
-          return (order === 'asc' ? aVal - bVal : bVal - aVal);
+          return bVal - aVal;
         }
         if (typeof aVal === 'string' && typeof bVal === 'string' && aVal !== bVal) {
-          return (order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal));
+          return aVal.localeCompare(bVal);
         }
       }
       return 0;

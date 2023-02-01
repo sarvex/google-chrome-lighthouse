@@ -128,7 +128,7 @@ class BootupTime extends Audit {
         label: str_(UIStrings.columnScriptParse)},
     ];
 
-    const details = BootupTime.makeTableDetails(headings, results, summary, [['total']]);
+    const details = BootupTime.makeTableDetails(headings, results, summary, ['total']);
 
     const score = Audit.computeLogNormalScore(
       {p10: context.options.p10, median: context.options.median},
