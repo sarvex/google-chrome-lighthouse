@@ -74,7 +74,7 @@ declare module Details {
      * If omitted, entity groups will be sorted by the audit ordering vs. the new totals.
      */
     sortedBy?: Array<string>;
-    /** Will be true if the table is in aggregated form already. */
+    /** Will be true if the table is already grouped by entities. */
     isEntityGrouped?: boolean;
     /** Column keys to skip summing. If omitted, all column types supported are summed. */
     skipSumming?: Array<string>;
@@ -110,7 +110,7 @@ declare module Details {
      * If omitted, entity groups will be sorted by the audit ordering vs. the new totals.
      */
     sortedBy?: Array<string>;
-    /** Will be true if the table is in aggregated form already. */
+    /** Will be true if the table is already grouped by entities. */
     isEntityGrouped?: boolean;
     /** Column keys to skip summing. If omitted, all column types supported are summed. */
     skipSumming?: Array<string>;
