@@ -153,10 +153,10 @@ class ReportUtils {
       for (const key of sortedBy) {
         const aVal = a[key];
         const bVal = b[key];
-        if (typeof aVal === 'number' && typeof bVal === 'number' && aVal !== bVal) {
+        if (typeof aVal === 'number' && aVal !== bVal) {
           return bVal - aVal;
         }
-        if (typeof aVal === 'string' && typeof bVal === 'string' && aVal !== bVal) {
+        if (typeof aVal === 'string' && aVal !== bVal) {
           return aVal.localeCompare(bVal);
         }
       }

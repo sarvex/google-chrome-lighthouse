@@ -421,7 +421,7 @@ export class DetailsRenderer {
    */
   _renderEntityGroupRow(item, headings) {
     const entityColumnHeading = {...headings[0]};
-    // In subitem-situations (unused-js), ensure Entity name is not rendered as code, etc.
+    // In subitem-situations (unused-javascript), ensure Entity name is not rendered as code, etc.
     entityColumnHeading.valueType = 'text';
     const aggregateRowHeadings = [entityColumnHeading, ...headings.slice(1)];
     const fragment = this._dom.createFragment();
@@ -441,13 +441,14 @@ export class DetailsRenderer {
     if (!items.length || details.isEntityGrouped || !items.some(item => item.entity)) {
       return [];
     }
+
     const skippedColumns = new Set(details.skipSumming || []);
     const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
     /** @type {string[]} */
     const aggregateKeys = [];
     for (const heading of headings) {
       if (!heading.key || skippedColumns.has(heading.key)) continue;
-      if ('valueType' in heading && supportedAggregations.includes(heading.valueType)) {
+      if (supportedAggregations.includes(heading.valueType)) {
         aggregateKeys.push(heading.key);
       }
     }
@@ -465,7 +466,7 @@ export class DetailsRenderer {
         entity: entityName,
       };
       for (const key of aggregateKeys) {
-        aggregate[key] = Number(aggregate[key] || 0) + Number(item[key]);
+        aggregate[key] = Number(aggregate[key] || 0) + Number(item[key] || 0);
       }
       byEntity.set(entityName, aggregate);
     }
