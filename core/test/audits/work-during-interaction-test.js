@@ -83,6 +83,8 @@ Object {
             },
           },
         ],
+        "skipGrouping": undefined,
+        "skipSumming": undefined,
         "sortedBy": undefined,
         "summary": undefined,
         "type": "table",
@@ -216,6 +218,8 @@ Object {
             "total": 285,
           },
         ],
+        "skipGrouping": undefined,
+        "skipSumming": undefined,
         "sortedBy": Array [
           "total",
         ],

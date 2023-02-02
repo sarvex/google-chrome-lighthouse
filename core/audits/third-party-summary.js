@@ -243,8 +243,8 @@ class ThirdPartySummary extends Audit {
       };
     }
 
-    const details = Audit.makeTableDetails(headings, results, overallSummary);
-    details.skipGrouping = true;
+    const details = Audit.makeTableDetails(headings, results, overallSummary,
+      undefined, undefined, true);
 
     return {
       score: Number(overallSummary.wastedMs <= PASS_THRESHOLD_IN_MS),
