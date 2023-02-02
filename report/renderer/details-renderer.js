@@ -379,25 +379,13 @@ export class DetailsRenderer {
   }
 
   /**
-   * Grab a matching entity from classification by its name
-   * @param {string} name
-   * @return {LH.Result.LhrEntity|undefined}
-   */
-  _getEntityByName(name) {
-    if (!this._entities) return;
-    const entityIndex = this._entities.entityIndexByName[name];
-    if (entityIndex === undefined) return;
-    return this._entities.list[entityIndex];
-  }
-
-  /**
    * Adorn a table row element with entity chips based on [data-entity] attribute.
    * @param {HTMLTableRowElement} rowEl
    */
   _adornTableRowWithEntityChips(rowEl) {
     const entityName = rowEl.dataset.entity;
     if (!entityName) return;
-    const matchedEntity = this._getEntityByName(entityName);
+    const matchedEntity = this._entities?.find(e => e.name === entityName);
     if (!matchedEntity) return;
 
     const firstTdEl = this._dom.find('td', rowEl);
