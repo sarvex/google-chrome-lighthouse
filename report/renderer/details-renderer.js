@@ -382,7 +382,7 @@ export class DetailsRenderer {
    * Adorn a table row element with entity chips based on [data-entity] attribute.
    * @param {HTMLTableRowElement} rowEl
    */
-  _adornTableRowWithEntityChips(rowEl) {
+  _adornEntityGroupRow(rowEl) {
     const entityName = rowEl.dataset.entity;
     if (!entityName) return;
     const matchedEntity = this._entities?.find(e => e.name === entityName);
@@ -415,7 +415,7 @@ export class DetailsRenderer {
   }
 
   /**
-   * Renders an aggregated row.
+   * Renders an entity-grouped row.
    * @param {TableItem} item
    * @param {LH.Audit.Details.TableColumnHeading[]} headings
    */
@@ -423,52 +423,56 @@ export class DetailsRenderer {
     const entityColumnHeading = {...headings[0]};
     // In subitem-situations (unused-javascript), ensure Entity name is not rendered as code, etc.
     entityColumnHeading.valueType = 'text';
-    const aggregateRowHeadings = [entityColumnHeading, ...headings.slice(1)];
+    const groupedRowHeadings = [entityColumnHeading, ...headings.slice(1)];
     const fragment = this._dom.createFragment();
-    fragment.append(this._renderTableRow(item, aggregateRowHeadings));
+    fragment.append(this._renderTableRow(item, groupedRowHeadings));
+    this._dom.find('tr', fragment).classList.add('lh-row--group');
     return fragment;
   }
 
   /**
-   * Computes entity group items and column totals from TableItem's
+   * Returns an array of entity-grouped TableItems to use as the top-level rows in
+   * an grouped table. Each table item returned represents a unique entity, with every
+   * applicable key that can be grouped as a property. Optionally, supported columns are
+   * summed by entity, and sorted by specified keys.
    * @param {TableLike} details
    * @return {TableItem[]}
    */
   _getEntityGroupItems(details) {
     const {items, headings, sortedBy} = details;
-    // Exclude pre-aggregated audits and results without entity classification.
-    // Eg. Third-party Summary comes pre-aggregated.
+    // Exclude entity-grouped audits and results without entity classification.
+    // Eg. Third-party Summary comes entity-grouped.
     if (!items.length || details.isEntityGrouped || !items.some(item => item.entity)) {
       return [];
     }
 
     const skippedColumns = new Set(details.skipSumming || []);
-    const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
+    const summableValueTypes = ['bytes', 'numeric', 'ms', 'timespanMs'];
     /** @type {string[]} */
-    const aggregateKeys = [];
+    const summableColumns = [];
     for (const heading of headings) {
       if (!heading.key || skippedColumns.has(heading.key)) continue;
-      if (supportedAggregations.includes(heading.valueType)) {
-        aggregateKeys.push(heading.key);
+      if (summableValueTypes.includes(heading.valueType)) {
+        summableColumns.push(heading.key);
       }
     }
 
-    // Grab the first column's key to aggregate by entity
-    const primaryKey = headings[0].key;
-    if (!primaryKey) return [];
+    // Grab the first column's key to group by entity
+    const firstColumnKey = headings[0].key;
+    if (!firstColumnKey) return [];
 
     /** @type {Map<string | undefined, TableItem>} */
     const byEntity = new Map();
     for (const item of items) {
       const entityName = typeof item.entity === 'string' ? item.entity : undefined;
-      const aggregate = byEntity.get(entityName) || {
-        [primaryKey]: entityName || Globals.strings.unattributable,
+      const groupedItem = byEntity.get(entityName) || {
+        [firstColumnKey]: entityName || Globals.strings.unattributable,
         entity: entityName,
       };
-      for (const key of aggregateKeys) {
-        aggregate[key] = Number(aggregate[key] || 0) + Number(item[key] || 0);
+      for (const key of summableColumns) {
+        groupedItem[key] = Number(groupedItem[key] || 0) + Number(item[key] || 0);
       }
-      byEntity.set(entityName, aggregate);
+      byEntity.set(entityName, groupedItem);
     }
 
     const result = [...byEntity.values()];
@@ -502,18 +506,15 @@ export class DetailsRenderer {
     if (entityItems.length) {
       for (const entityItem of entityItems) {
         const entityName = typeof entityItem.entity === 'string' ? entityItem.entity : undefined;
-        // Render the heading row
         const entityGroupFragment = this._renderEntityGroupRow(entityItem, details.headings);
         // Render all the items that match the heading row
         for (const item of details.items.filter((item) => item.entity === entityName)) {
           entityGroupFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }
         const rowEls = this._dom.findAll('tr', entityGroupFragment);
-        const firstRowEl = rowEls[0];
-        firstRowEl.classList.add('lh-row--group');
-        if (entityName) {
+        if (entityName && rowEls.length) {
           rowEls.forEach(row => row.dataset.entity = entityName);
-          this._adornTableRowWithEntityChips(firstRowEl);
+          this._adornEntityGroupRow(rowEls[0]);
         }
         tbodyElem.append(entityGroupFragment);
       }
@@ -529,7 +530,7 @@ export class DetailsRenderer {
         if (details.isEntityGrouped && item.entity) {
           // If the audit is already grouped, consider first row as a heading row.
           firstRowEl.classList.add('lh-row--group');
-          this._adornTableRowWithEntityChips(firstRowEl);
+          this._adornEntityGroupRow(firstRowEl);
         } else {
           for (const rowEl of rowEls) {
             // For zebra styling (same shade for a row and its sub-rows).
