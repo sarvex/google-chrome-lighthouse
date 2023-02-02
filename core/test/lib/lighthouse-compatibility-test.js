@@ -182,7 +182,7 @@ describe('backward compatibility', () => {
     const clonedSampleResult = cloneLhr(sampleResult);
 
     const details = clonedSampleResult.audits['third-party-summary'].details;
-    delete details.isAggregated;
+    delete details.skipGrouping;
     details.headings[0].valueType = 'link';
     for (const item of details.items) {
       item.entity = {
@@ -195,6 +195,6 @@ describe('backward compatibility', () => {
     // Original audit results should be restored.
     const preparedResult = upgradeLhr(clonedSampleResult);
     assert.deepStrictEqual(preparedResult.audits, sampleResult.audits);
-    assert.strictEqual(preparedResult.audits['third-party-summary'].details.isAggregated, true);
+    assert.strictEqual(preparedResult.audits['third-party-summary'].details.skipGrouping, true);
   });
 });

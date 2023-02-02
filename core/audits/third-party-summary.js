@@ -244,7 +244,7 @@ class ThirdPartySummary extends Audit {
     }
 
     const details = Audit.makeTableDetails(headings, results, overallSummary);
-    details.isAggregated = true;
+    details.skipGrouping = true;
 
     return {
       score: Number(overallSummary.wastedMs <= PASS_THRESHOLD_IN_MS),

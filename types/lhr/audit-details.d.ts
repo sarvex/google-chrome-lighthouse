@@ -69,10 +69,13 @@ declare module Details {
     headings: TableColumnHeading[];
     items: OpportunityItem[];
     debugData?: DebugData;
-    /** Sort order of this opportunity */
+    /**
+     * Columns to sort the items by, during grouping.
+     * If omitted, entity groups will be sorted by the audit ordering vs. the new totals.
+     */
     sortedBy?: Array<string>;
-    /** Is this opportunity in aggregated form already? */
-    isAggregated?: boolean;
+    /** Will be true if the table is in aggregated form already. */
+    skipGrouping?: boolean;
   }
 
   interface Screenshot {
@@ -103,7 +106,7 @@ declare module Details {
     /** Array of keys that the table is sorted by. Keys earlier in the list will have a higher sort precedence. */
     sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
-    isAggregated?: boolean;
+    skipGrouping?: boolean;
   }
 
   /** A table item for rows that are nested within a top-level TableItem (row). */

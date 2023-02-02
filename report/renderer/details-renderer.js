@@ -419,9 +419,9 @@ export class DetailsRenderer {
    * @param {TableItem} item
    * @param {LH.Audit.Details.TableColumnHeading[]} headings
    */
-  _renderTableAggregatedRowFromItem(item, headings) {
+  _renderEntityGroupRow(item, headings) {
     const entityColumnHeading = {...headings[0]};
-     // In subitem-situations (unused-js), ensure Entity name is not rendered as code, etc.
+    // In subitem-situations (unused-js), ensure Entity name is not rendered as code, etc.
     entityColumnHeading.valueType = 'text';
     const aggregateRowHeadings = [entityColumnHeading, ...headings.slice(1)];
     const fragment = this._dom.createFragment();
@@ -430,15 +430,15 @@ export class DetailsRenderer {
   }
 
   /**
-   * Computes aggregations and aggRows by entity from a list of TableItem's
+   * Computes entity group items and column totals from TableItem's
    * @param {TableLike} details
    * @return {TableItem[]}
    */
-  _computeEntityAggregations(details) {
+  _getEntityGroupItems(details) {
     const {items, headings, sortedBy} = details;
     // Exclude pre-aggregated audits and results without entity classification.
     // Eg. Third-party Summary comes pre-aggregated.
-    if (!items.length || details.isAggregated || !items.some(item => item.entity)) {
+    if (!items.length || details.skipGrouping || !items.some(item => item.entity)) {
       return [];
     }
 
@@ -498,33 +498,34 @@ export class DetailsRenderer {
 
     const entityItems = this._getEntityGroupItems(details);
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
-    if (aggregations.length) {
-      for (const aggRow of aggregations) {
-        const entityName = typeof aggRow.entity === 'string' ? aggRow.entity : undefined;
+    if (entityItems.length) {
+      for (const entityItem of entityItems) {
+        const entityName = typeof entityItem.entity === 'string' ? entityItem.entity : undefined;
         // Render the heading row
         const entityGroupFragment = this._renderEntityGroupRow(entityItem, details.headings);
         // Render all the items that match the heading row
         for (const item of details.items.filter((item) => item.entity === entityName)) {
-          aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
+          entityGroupFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }
-        const allRowEls = this._dom.findAll('tr', aggregateFragment);
+        const allRowEls = this._dom.findAll('tr', entityGroupFragment);
         const firstRowEl = allRowEls[0];
         firstRowEl.classList.add('lh-row--group');
         if (entityName) {
           allRowEls.forEach(row => row.dataset.entity = entityName);
           this._adornTableRowWithEntityChips(firstRowEl);
         }
-        tbodyElem.append(aggregateFragment);
+        tbodyElem.append(entityGroupFragment);
       }
     } else {
       let even = true;
       for (const item of details.items) {
         const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
-        const entityName = typeof item.entity === 'string' ? item.entity : undefined;
         const allRowEls = this._dom.findAll('tr', rowsFragment);
         const firstRowEl = allRowEls[0];
-        firstRowEl.dataset.entity = entityName;
-        if (details.isAggregated) {
+        if (typeof item.entity === 'string') {
+          firstRowEl.dataset.entity = item.entity;
+        }
+        if (details.skipGrouping) {
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);
         } else {

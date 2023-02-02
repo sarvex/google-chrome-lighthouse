@@ -2250,7 +2250,7 @@
           "wastedBytes": 30346,
           "wastedMs": 0
         },
-        "isAggregated": true
+        "skipGrouping": true
       }
     },
     "third-party-facades": {

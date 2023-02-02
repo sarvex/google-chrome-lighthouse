@@ -1476,7 +1476,7 @@
                 "wastedBytes": 20174,
                 "wastedMs": 0
               },
-              "isAggregated": true
+              "skipGrouping": true
             }
           },
           "third-party-facades": {
@@ -8721,7 +8721,7 @@
                 "wastedBytes": 25328,
                 "wastedMs": 0
               },
-              "isAggregated": true
+              "skipGrouping": true
             }
           },
           "layout-shift-elements": {
@@ -17369,7 +17369,7 @@
                 "wastedBytes": 0,
                 "wastedMs": 0
               },
-              "isAggregated": true
+              "skipGrouping": true
             }
           },
           "third-party-facades": {
