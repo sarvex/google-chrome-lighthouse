@@ -1476,7 +1476,7 @@
                 "wastedBytes": 20174,
                 "wastedMs": 0
               },
-              "skipGrouping": true
+              "isEntityGrouped": true
             }
           },
           "third-party-facades": {
@@ -4293,7 +4293,6 @@
         "entities": [
           {
             "name": "mikescerealshack.co",
-            "category": "",
             "origins": [
               "https://www.mikescerealshack.co",
               "https://events.mikescerealshack.co"
@@ -4304,11 +4303,11 @@
           {
             "name": "Google Fonts",
             "homepage": "https://fonts.google.com/",
-            "category": "cdn",
             "origins": [
               "https://fonts.googleapis.com",
               "https://fonts.gstatic.com"
-            ]
+            ],
+            "category": "cdn"
           }
         ],
         "fullPageScreenshot": {
@@ -8723,7 +8722,7 @@
                 "wastedBytes": 25328,
                 "wastedMs": 0
               },
-              "skipGrouping": true
+              "isEntityGrouped": true
             }
           },
           "layout-shift-elements": {
@@ -9974,7 +9973,6 @@
         "entities": [
           {
             "name": "mikescerealshack.co",
-            "category": "",
             "origins": [
               "https://www.mikescerealshack.co",
               "https://cdn.mikescerealshack.co"
@@ -9985,10 +9983,10 @@
           {
             "name": "Algolia",
             "homepage": "https://www.algolia.com/",
-            "category": "utility",
             "origins": [
               "https://mnl4bjjsnz-dsn.algolia.net"
-            ]
+            ],
+            "category": "utility"
           }
         ],
         "fullPageScreenshot": {
@@ -17375,7 +17373,7 @@
                 "wastedBytes": 0,
                 "wastedMs": 0
               },
-              "skipGrouping": true
+              "isEntityGrouped": true
             }
           },
           "third-party-facades": {
@@ -20261,7 +20259,6 @@
         "entities": [
           {
             "name": "mikescerealshack.co",
-            "category": "",
             "origins": [
               "https://www.mikescerealshack.co",
               "https://events.mikescerealshack.co"
@@ -20272,11 +20269,11 @@
           {
             "name": "Google Fonts",
             "homepage": "https://fonts.google.com/",
-            "category": "cdn",
             "origins": [
               "https://fonts.googleapis.com",
               "https://fonts.gstatic.com"
-            ]
+            ],
+            "category": "cdn"
           }
         ],
         "fullPageScreenshot": {

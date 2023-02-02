@@ -29,7 +29,7 @@ class ReportUtils {
       // Attach table/opportunity items with entity information.
       if (audit.details) {
         if (audit.details.type === 'opportunity' || audit.details.type === 'table') {
-          if (!audit.details.skipGrouping && clone.entities) {
+          if (!audit.details.isEntityGrouped && clone.entities) {
             ReportUtils.classifyEntities(clone.entities, audit.details);
           }
         }

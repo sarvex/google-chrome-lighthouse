@@ -126,10 +126,10 @@ class Audit {
    * @param {LH.Audit.Details.Table['summary']=} summary
    * @param {LH.Audit.Details.Table['sortedBy']=} sortedBy
    * @param {LH.Audit.Details.Table['skipSumming']=} skipSumming
-   * @param {LH.Audit.Details.Table['skipGrouping']=} skipGrouping
+   * @param {LH.Audit.Details.Table['isEntityGrouped']=} isEntityGrouped
    * @return {LH.Audit.Details.Table}
    */
-  static makeTableDetails(headings, results, summary, sortedBy, skipSumming, skipGrouping) {
+  static makeTableDetails(headings, results, summary, sortedBy, skipSumming, isEntityGrouped) {
     if (results.length === 0) {
       return {
         type: 'table',
@@ -148,7 +148,7 @@ class Audit {
       summary,
       sortedBy,
       skipSumming,
-      skipGrouping,
+      isEntityGrouped,
     };
   }
 
@@ -225,11 +225,11 @@ class Audit {
    * @param {number=} overallSavingsBytes
    * @param {LH.Audit.Details.Opportunity['sortedBy']=} sortedBy
    * @param {LH.Audit.Details.Opportunity['skipSumming']=} skipSumming
-   * @param {LH.Audit.Details.Opportunity['skipGrouping']=} skipGrouping
+   * @param {LH.Audit.Details.Opportunity['isEntityGrouped']=} isEntityGrouped
    * @return {LH.Audit.Details.Opportunity}
    */
   static makeOpportunityDetails(headings, items, overallSavingsMs, overallSavingsBytes,
-      sortedBy, skipSumming, skipGrouping) {
+      sortedBy, skipSumming, isEntityGrouped) {
     Audit.assertHeadingKeysExist(headings, items);
 
     return {
@@ -240,7 +240,7 @@ class Audit {
       overallSavingsBytes,
       sortedBy,
       skipSumming,
-      skipGrouping,
+      isEntityGrouped,
     };
   }
 

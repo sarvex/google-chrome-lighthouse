@@ -2250,7 +2250,7 @@
           "wastedBytes": 30346,
           "wastedMs": 0
         },
-        "skipGrouping": true
+        "isEntityGrouped": true
       }
     },
     "third-party-facades": {
@@ -6520,7 +6520,6 @@
   "entities": [
     {
       "name": "localhost",
-      "category": "",
       "origins": [
         "http://localhost:10200"
       ],
@@ -6530,10 +6529,10 @@
     {
       "name": "Google CDN",
       "homepage": "https://developers.google.com/speed/libraries/",
-      "category": "cdn",
       "origins": [
         "http://ajax.googleapis.com"
-      ]
+      ],
+      "category": "cdn"
     }
   ],
   "fullPageScreenshot": {

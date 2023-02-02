@@ -438,7 +438,7 @@ export class DetailsRenderer {
     const {items, headings, sortedBy} = details;
     // Exclude pre-aggregated audits and results without entity classification.
     // Eg. Third-party Summary comes pre-aggregated.
-    if (!items.length || details.skipGrouping || !items.some(item => item.entity)) {
+    if (!items.length || details.isEntityGrouped || !items.some(item => item.entity)) {
       return [];
     }
     const skippedColumns = new Set(details.skipSumming || []);
@@ -525,7 +525,7 @@ export class DetailsRenderer {
         if (typeof item.entity === 'string') {
           firstRowEl.dataset.entity = item.entity;
         }
-        if (details.skipGrouping) {
+        if (details.isEntityGrouped) {
           // If the audit is already grouped, consider first row as a heading row.
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);

@@ -75,7 +75,7 @@ declare module Details {
      */
     sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
-    skipGrouping?: boolean;
+    isEntityGrouped?: boolean;
     /** Column keys to skip summing. If omitted, all column types supported are summed. */
     skipSumming?: Array<string>;
   }
@@ -111,7 +111,7 @@ declare module Details {
      */
     sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
-    skipGrouping?: boolean;
+    isEntityGrouped?: boolean;
     /** Column keys to skip summing. If omitted, all column types supported are summed. */
     skipSumming?: Array<string>;
   }

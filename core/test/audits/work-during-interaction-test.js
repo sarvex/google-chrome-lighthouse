@@ -83,7 +83,7 @@ Object {
             },
           },
         ],
-        "skipGrouping": undefined,
+        "isEntityGrouped": undefined,
         "skipSumming": undefined,
         "sortedBy": undefined,
         "summary": undefined,
@@ -218,7 +218,7 @@ Object {
             "total": 285,
           },
         ],
-        "skipGrouping": undefined,
+        "isEntityGrouped": undefined,
         "skipSumming": undefined,
         "sortedBy": Array [
           "total",

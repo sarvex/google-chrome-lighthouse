@@ -93,7 +93,7 @@ function upgradeLhrForCompatibility(lhr) {
                 item.entity = item.entity.text;
               }
             }
-            audit.details.skipGrouping = true;
+            audit.details.isEntityGrouped = true;
           }
         }
       }
