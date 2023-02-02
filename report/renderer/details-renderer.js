@@ -525,7 +525,7 @@ export class DetailsRenderer {
         if (typeof item.entity === 'string') {
           firstRowEl.dataset.entity = item.entity;
         }
-        if (details.isEntityGrouped) {
+        if (details.isEntityGrouped && item.entity) {
           // If the audit is already grouped, consider first row as a heading row.
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);

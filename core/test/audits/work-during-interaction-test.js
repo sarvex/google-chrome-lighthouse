@@ -63,6 +63,7 @@ Object {
             "valueType": "node",
           },
         ],
+        "isEntityGrouped": undefined,
         "items": Array [
           Object {
             "node": Object {
@@ -83,7 +84,6 @@ Object {
             },
           },
         ],
-        "isEntityGrouped": undefined,
         "skipSumming": undefined,
         "sortedBy": undefined,
         "summary": undefined,
@@ -142,6 +142,7 @@ Object {
             "valueType": "ms",
           },
         ],
+        "isEntityGrouped": undefined,
         "items": Array [
           Object {
             "phase": Object {
@@ -218,7 +219,6 @@ Object {
             "total": 285,
           },
         ],
-        "isEntityGrouped": undefined,
         "skipSumming": undefined,
         "sortedBy": Array [
           "total",
