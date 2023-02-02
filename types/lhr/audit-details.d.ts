@@ -76,6 +76,8 @@ declare module Details {
     sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
     skipGrouping?: boolean;
+    /** Column keys to skip summing. If omitted, all column types supported are summed. */
+    skipSumming?: Array<string>;
   }
 
   interface Screenshot {
@@ -103,10 +105,15 @@ declare module Details {
       wastedBytes?: number;
     };
     debugData?: DebugData;
-    /** Array of keys that the table is sorted by. Keys earlier in the list will have a higher sort precedence. */
+    /**
+     * Columns to sort the items by, during grouping.
+     * If omitted, entity groups will be sorted by the audit ordering vs. the new totals.
+     */
     sortedBy?: Array<string>;
     /** Will be true if the table is in aggregated form already. */
     skipGrouping?: boolean;
+    /** Column keys to skip summing. If omitted, all column types supported are summed. */
+    skipSumming?: Array<string>;
   }
 
   /** A table item for rows that are nested within a top-level TableItem (row). */
@@ -159,9 +166,6 @@ declare module Details {
 
     displayUnit?: string;
     granularity?: number;
-
-    /** Ignore this column while aggregating. */
-    noAggregation?: boolean;
   }
 
   interface TableItem {

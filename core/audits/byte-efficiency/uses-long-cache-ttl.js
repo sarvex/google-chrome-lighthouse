@@ -275,14 +275,14 @@ class CacheHeaders extends Audit {
       {key: 'url', valueType: 'url', label: str_(i18n.UIStrings.columnURL)},
       // TODO(i18n): pre-compute localized duration
       {key: 'cacheLifetimeMs', valueType: 'ms', label: str_(i18n.UIStrings.columnCacheTTL),
-        displayUnit: 'duration', noAggregation: true},
+        displayUnit: 'duration'},
       {key: 'totalBytes', valueType: 'bytes', label: str_(i18n.UIStrings.columnTransferSize),
         displayUnit: 'kb', granularity: 1},
     ];
 
     const summary = {wastedBytes: totalWastedBytes};
     const details = Audit.makeTableDetails(headings, results, summary,
-      ['totalBytes']);
+      ['totalBytes'], ['cacheLifetimeMs']);
 
     return {
       score,

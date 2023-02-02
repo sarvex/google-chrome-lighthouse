@@ -441,12 +441,12 @@ export class DetailsRenderer {
     if (!items.length || details.skipGrouping || !items.some(item => item.entity)) {
       return [];
     }
-
+    const skippedColumns = new Set(details.skipSumming || []);
     const supportedAggregations = ['bytes', 'numeric', 'ms', 'timespanMs'];
     /** @type {string[]} */
     const aggregateKeys = [];
     for (const heading of headings) {
-      if (!heading.key || heading.noAggregation) continue;
+      if (!heading.key || skippedColumns.has(heading.key)) continue;
       if ('valueType' in heading && supportedAggregations.includes(heading.valueType)) {
         aggregateKeys.push(heading.key);
       }
@@ -507,11 +507,11 @@ export class DetailsRenderer {
         for (const item of details.items.filter((item) => item.entity === entityName)) {
           entityGroupFragment.append(this._renderTableRowsFromItem(item, details.headings));
         }
-        const allRowEls = this._dom.findAll('tr', entityGroupFragment);
-        const firstRowEl = allRowEls[0];
+        const rowEls = this._dom.findAll('tr', entityGroupFragment);
+        const firstRowEl = rowEls[0];
         firstRowEl.classList.add('lh-row--group');
         if (entityName) {
-          allRowEls.forEach(row => row.dataset.entity = entityName);
+          rowEls.forEach(row => row.dataset.entity = entityName);
           this._adornTableRowWithEntityChips(firstRowEl);
         }
         tbodyElem.append(entityGroupFragment);
@@ -520,17 +520,18 @@ export class DetailsRenderer {
       let even = true;
       for (const item of details.items) {
         const rowsFragment = this._renderTableRowsFromItem(item, details.headings);
-        const allRowEls = this._dom.findAll('tr', rowsFragment);
-        const firstRowEl = allRowEls[0];
+        const rowEls = this._dom.findAll('tr', rowsFragment);
+        const firstRowEl = rowEls[0];
         if (typeof item.entity === 'string') {
           firstRowEl.dataset.entity = item.entity;
         }
         if (details.skipGrouping) {
+          // If the audit is already grouped, consider first row as a heading row.
           firstRowEl.classList.add('lh-row--group');
           this._adornTableRowWithEntityChips(firstRowEl);
         } else {
-          for (const rowEl of allRowEls) {
-            // For zebra styling.
+          for (const rowEl of rowEls) {
+            // For zebra styling (same shade for a row and its sub-rows).
             rowEl.classList.add(even ? 'lh-row--even' : 'lh-row--odd');
           }
         }

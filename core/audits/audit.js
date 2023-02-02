@@ -125,9 +125,10 @@ class Audit {
    * @param {LH.Audit.Details.Table['items']} results
    * @param {LH.Audit.Details.Table['summary']=} summary
    * @param {LH.Audit.Details.Table['sortedBy']=} sortedBy
+   * @param {LH.Audit.Details.Table['skipSumming']=} skipSumming
    * @return {LH.Audit.Details.Table}
    */
-  static makeTableDetails(headings, results, summary, sortedBy) {
+  static makeTableDetails(headings, results, summary, sortedBy, skipSumming) {
     if (results.length === 0) {
       return {
         type: 'table',
@@ -145,6 +146,7 @@ class Audit {
       items: results,
       summary,
       sortedBy,
+      skipSumming,
     };
   }
 
