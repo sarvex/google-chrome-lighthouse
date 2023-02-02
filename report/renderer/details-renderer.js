@@ -421,6 +421,7 @@ export class DetailsRenderer {
    */
   _renderTableAggregatedRowFromItem(item, headings) {
     const entityColumnHeading = {...headings[0]};
+     // In subitem-situations (unused-js), ensure Entity name is not rendered as code, etc.
     entityColumnHeading.valueType = 'text';
     const aggregateRowHeadings = [entityColumnHeading, ...headings.slice(1)];
     const fragment = this._dom.createFragment();
@@ -495,13 +496,13 @@ export class DetailsRenderer {
       this._dom.createChildOf(theadTrElem, 'th', classes).append(labelEl);
     }
 
-    const aggregations = this._computeEntityAggregations(details);
+    const entityItems = this._getEntityGroupItems(details);
     const tbodyElem = this._dom.createChildOf(tableElem, 'tbody');
     if (aggregations.length) {
       for (const aggRow of aggregations) {
         const entityName = typeof aggRow.entity === 'string' ? aggRow.entity : undefined;
         // Render the heading row
-        const aggregateFragment = this._renderTableAggregatedRowFromItem(aggRow, details.headings);
+        const entityGroupFragment = this._renderEntityGroupRow(entityItem, details.headings);
         // Render all the items that match the heading row
         for (const item of details.items.filter((item) => item.entity === entityName)) {
           aggregateFragment.append(this._renderTableRowsFromItem(item, details.headings));
