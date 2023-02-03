@@ -248,7 +248,7 @@ export class ReportUIFeatures {
       const thirdPartyRowEls = this._getThirdPartyRows(nonSubItemRows,
         Util.getFinalDisplayedUrl(this.json));
       // Entity-grouped tables don't have zebra lines.
-      const hasZebraStyle = !rowEls.some(rowEl => rowEl.classList.contains('lh-row--group'));
+      const hasZebraStyle = rowEls.some(rowEl => rowEl.classList.contains('lh-row--even'));
 
       // create input box
       const filterTemplate = this._dom.createComponent('3pFilter');

@@ -299,16 +299,16 @@ describe('ReportUIFeatures', () => {
         });
 
         it('filters out sub-item rows of third party resources on click', () => {
-          dom.find('#unused-javascript', container);
-          const filterCheckbox = dom.find('#unused-javascript .lh-3p-filter-input', container);
+          const auditEl = dom.find('#unused-javascript', container);
+          const filterCheckbox = dom.find('.lh-3p-filter-input', auditEl);
 
           // ensure filter checkbox is visible
-          expect(dom.find('#unused-javascript .lh-3p-filter', container).hidden).toBeFalsy();
+          expect(dom.find('.lh-3p-filter', auditEl).hidden).toBeFalsy();
 
           function getRowIdentifiers() {
             return dom
               .findAll(
-                '#unused-javascript tbody tr:not(.lh-row--hidden)', container)
+                'tbody tr:not(.lh-row--hidden)', auditEl)
               .map(el => el.textContent);
           }
 
@@ -328,17 +328,23 @@ describe('ReportUIFeatures', () => {
           ];
 
           expect(getRowIdentifiers()).toEqual(initialExpected);
+          // Ensure zebra striping isn't used for grouped tables.
+          expect(dom.findAll('tbody .lh-row--even', auditEl).length).toEqual(0);
+
           filterCheckbox.click();
+          expect(dom.findAll('tbody .lh-row--even', auditEl).length).toEqual(0);
           expect(getRowIdentifiers()).toEqual([
             'example.com 1st party24.0 KiB8.8 KiB',
             '/script2.js(www.example.com)24.0 KiB8.8 KiB',
             '30.0 KiB0.0 KiB',
             '40.0 KiB0.0 KiB',
           ]);
+
           filterCheckbox.click();
+          expect(dom.findAll('tbody .lh-row--even', auditEl).length).toEqual(0);
           expect(getRowIdentifiers()).toEqual(initialExpected);
 
-          const filter3pCount = dom.find('#unused-javascript .lh-3p-filter-count', container);
+          const filter3pCount = dom.find('#unused-javascript .lh-3p-filter-count', auditEl);
           expect(filter3pCount.textContent).toEqual('2');
         });
 
