@@ -7,6 +7,7 @@
 import assert from 'assert/strict';
 
 import jsdom from 'jsdom';
+import jestMock from 'jest-mock';
 
 import {DOM} from '../../renderer/dom.js';
 import {I18nFormatter} from '../../renderer/i18n-formatter.js';
@@ -606,6 +607,31 @@ describe('DetailsRenderer', () => {
         assert.equal(el.querySelectorAll('tr').length, 7, 'did not render table rows');
         assert.equal(el.querySelectorAll('.lh-row--group').length, 1,
           'did not style entity classified row as a grouped row');
+      });
+
+      it('throws a warning for unsupported types being sorted', () => {
+        const backupConsole = global.console.warn;
+        global.console.warn = jestMock.fn();
+
+        renderer.render({
+          type: 'table',
+          sortedBy: ['totalBytes'],
+          headings: [
+            {key: 'url', valueType: 'url', label: 'URL'},
+            {key: 'totalBytes', valueType: 'text', label: 'Size (KiB)'},
+            {key: 'wastedBytes', valueType: 'bytes', label: 'Potential Savings (KiB)'},
+          ],
+          items: [
+            {url: 'https://example.com/1',
+              totalBytes: {type: 'link', text: 'linkText', url: 'linkUrl'},
+              wastedBytes: 500, entity: 'example.com'},
+            {url: 'Unattributable', totalBytes: true, wastedBytes: 500},
+            {url: 'https://cdn.com/2', totalBytes: 400, wastedBytes: 800, entity: 'cdn.com'},
+          ],
+        });
+
+        expect(global.console.warn).toHaveBeenCalled();
+        global.console.warn = backupConsole;
       });
 
       it('skips summing on skipSumming columns', () => {

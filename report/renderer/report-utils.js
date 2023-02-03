@@ -153,6 +153,9 @@ class ReportUtils {
       for (const key of sortedBy) {
         const aVal = a[key];
         const bVal = b[key];
+        if (typeof aVal !== typeof bVal || !['number', 'string'].includes(typeof aVal)) {
+          console.warn(`Warning: Attempting to sort unsupported value type: ${key}.`);
+        }
         if (typeof aVal === 'number' && typeof bVal === 'number' && aVal !== bVal) {
           return bVal - aVal;
         }

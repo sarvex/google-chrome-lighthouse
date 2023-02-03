@@ -33,6 +33,7 @@ import {Globals} from './report-globals.js';
 import {ReportUtils} from './report-utils.js';
 
 const URL_PREFIXES = ['http://', 'https://', 'data:'];
+const SUMMABLE_VALUETYPES = ['bytes', 'numeric', 'ms', 'timespanMs'];
 
 export class DetailsRenderer {
   /**
@@ -447,12 +448,11 @@ export class DetailsRenderer {
     }
 
     const skippedColumns = new Set(details.skipSumming || []);
-    const summableValueTypes = ['bytes', 'numeric', 'ms', 'timespanMs'];
     /** @type {string[]} */
     const summableColumns = [];
     for (const heading of headings) {
       if (!heading.key || skippedColumns.has(heading.key)) continue;
-      if (summableValueTypes.includes(heading.valueType)) {
+      if (SUMMABLE_VALUETYPES.includes(heading.valueType)) {
         summableColumns.push(heading.key);
       }
     }
