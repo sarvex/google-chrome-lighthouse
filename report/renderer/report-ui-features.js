@@ -247,6 +247,8 @@ export class ReportUIFeatures {
       const nonSubItemRows = rowEls.filter(rowEl => !rowEl.classList.contains('lh-sub-item-row'));
       const thirdPartyRowEls = this._getThirdPartyRows(nonSubItemRows,
         Util.getFinalDisplayedUrl(this.json));
+      // Entity-grouped tables don't have zebra lines.
+      const hasZebraStyle = !rowEls.some(rowEl => rowEl.classList.contains('lh-row--group'));
 
       // create input box
       const filterTemplate = this._dom.createComponent('3pFilter');
@@ -262,9 +264,12 @@ export class ReportUIFeatures {
           // Iterate subsequent associated sub item rows.
           do {
             rowEl.classList.toggle('lh-row--hidden', shouldHide);
-            // Adjust for zebra styling.
-            rowEl.classList.toggle('lh-row--even', !shouldHide && even);
-            rowEl.classList.toggle('lh-row--odd', !shouldHide && !even);
+
+            if (hasZebraStyle) {
+              // Adjust for zebra styling.
+              rowEl.classList.toggle('lh-row--even', !shouldHide && even);
+              rowEl.classList.toggle('lh-row--odd', !shouldHide && !even);
+            }
 
             rowEl = /** @type {HTMLElement} */ (rowEl.nextElementSibling);
           } while (rowEl && rowEl.classList.contains('lh-sub-item-row'));
