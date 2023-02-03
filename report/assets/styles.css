@@ -1574,8 +1574,14 @@
   filter: invert(1);
 }
 
+/** Manages indentation of two-level and three-level nested adjacent rows */
+
 .lh-row--group ~ [data-entity]:not(.lh-row--group) td:first-child {
   padding-left: 20px;
+}
+
+.lh-row--group ~ [data-entity]:not(.lh-row--group) ~ .lh-sub-item-row td:first-child {
+  padding-left: 40px;
 }
 
 .lh-row--even {
@@ -1676,10 +1682,6 @@
   margin-left: 20px;
   margin-bottom: 0;
   color: var(--color-gray-700);
-}
-
-.lh-row--group ~ .lh-sub-item-row td:first-child {
-  padding-left: 40px;
 }
 
 .lh-sub-item-row td {
