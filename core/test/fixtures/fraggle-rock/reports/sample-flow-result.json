@@ -2516,10 +2516,7 @@
             "details": {
               "type": "table",
               "headings": [],
-              "items": [],
-              "summary": {
-                "wastedBytes": 0
-              }
+              "items": []
             }
           },
           "total-byte-weight": {
@@ -3064,7 +3061,6 @@
                   "npm": "next"
                 }
               ],
-              "summary": {},
               "debugData": {
                 "type": "debugdata",
                 "stacks": [
@@ -3200,8 +3196,7 @@
             "details": {
               "type": "table",
               "headings": [],
-              "items": [],
-              "summary": {}
+              "items": []
             }
           },
           "crawlable-anchors": {
@@ -13254,7 +13249,6 @@
                   "npm": "next"
                 }
               ],
-              "summary": {},
               "debugData": {
                 "type": "debugdata",
                 "stacks": [
@@ -13359,8 +13353,7 @@
             "details": {
               "type": "table",
               "headings": [],
-              "items": [],
-              "summary": {}
+              "items": []
             }
           },
           "crawlable-anchors": {
@@ -17369,10 +17362,6 @@
                   }
                 }
               ],
-              "summary": {
-                "wastedBytes": 0,
-                "wastedMs": 0
-              },
               "isEntityGrouped": true
             }
           },
@@ -18355,10 +18344,7 @@
             "details": {
               "type": "table",
               "headings": [],
-              "items": [],
-              "summary": {
-                "wastedBytes": 0
-              }
+              "items": []
             }
           },
           "total-byte-weight": {
@@ -18973,7 +18959,6 @@
                   "npm": "next"
                 }
               ],
-              "summary": {},
               "debugData": {
                 "type": "debugdata",
                 "stacks": [
@@ -19109,8 +19094,7 @@
             "details": {
               "type": "table",
               "headings": [],
-              "items": [],
-              "summary": {}
+              "items": []
             }
           },
           "crawlable-anchors": {

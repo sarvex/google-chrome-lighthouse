@@ -104,8 +104,8 @@ class LongTasks extends Audit {
       /* eslint-enable max-len */
     ];
 
-    const tableDetails = Audit.makeTableDetails(headings, results, undefined,
-      ['duration'], ['startTime']);
+    const tableDetails = Audit.makeTableDetails(headings, results,
+      {sortedBy: ['duration'], skipSumming: ['startTime']});
 
     let displayValue;
     if (results.length > 0) {

@@ -4779,7 +4779,6 @@
             "name": "WordPress"
           }
         ],
-        "summary": {},
         "debugData": {
           "type": "debugdata",
           "stacks": [
@@ -4992,8 +4991,7 @@
       "details": {
         "type": "table",
         "headings": [],
-        "items": [],
-        "summary": {}
+        "items": []
       }
     },
     "crawlable-anchors": {

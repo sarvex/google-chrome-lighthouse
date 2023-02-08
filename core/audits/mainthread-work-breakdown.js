@@ -114,8 +114,8 @@ class MainThreadWorkBreakdown extends Audit {
     ];
 
     results.sort((a, b) => categoryTotals[b.group] - categoryTotals[a.group]);
-    const tableDetails = MainThreadWorkBreakdown.makeTableDetails(
-      headings, results, undefined, ['duration']);
+    const tableDetails = MainThreadWorkBreakdown.makeTableDetails(headings, results,
+      {sortedBy: ['duration']});
 
     const score = Audit.computeLogNormalScore(
       {p10: context.options.p10, median: context.options.median},

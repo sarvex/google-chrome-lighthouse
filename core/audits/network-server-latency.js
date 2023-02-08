@@ -72,8 +72,8 @@ class NetworkServerLatency extends Audit {
         label: str_(i18n.UIStrings.columnTimeSpent)},
     ];
 
-    const tableDetails = Audit.makeTableDetails(headings, results, undefined,
-      ['serverResponseTime']);
+    const tableDetails = Audit.makeTableDetails(headings, results,
+      {sortedBy: ['serverResponseTime']});
 
     return {
       score: Math.max(1 - (maxLatency / 500), 0),

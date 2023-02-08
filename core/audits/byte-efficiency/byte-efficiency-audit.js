@@ -230,9 +230,8 @@ class ByteEfficiencyAudit extends Audit {
     }
 
     const sortedBy = result.sortedBy || ['wastedBytes'];
-
-    const details = Audit.makeOpportunityDetails(
-      result.headings, results, wastedMs, wastedBytes, sortedBy);
+    const details = Audit.makeOpportunityDetails(result.headings, results,
+      {overallSavingsMs: wastedMs, overallSavingsBytes: wastedBytes, sortedBy});
 
     return {
       explanation: result.explanation,
