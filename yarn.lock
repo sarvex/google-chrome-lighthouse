@@ -6054,20 +6054,13 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-quibble@0.6.16:
+quibble@^0.6.14:
   version "0.6.16"
   resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.6.16.tgz#479730844a134a172dbedc7ebfcaca76e02c80a2"
   integrity sha512-gq0HKVabRNwKOOZitqiHLVGTky/690XG5yOOdadi/tkBJ4WhvcSkbtmWplAgqqzIr2mjYN2wkvCKYqVA5dlldQ==
   dependencies:
     lodash "^4.17.21"
     resolve "^1.22.1"
-
-quibble@^0.6.7, quibble@connorjclark/quibble#fork:
-  version "0.6.12"
-  resolved "https://codeload.github.com/connorjclark/quibble/tar.gz/f49c6c6122f08a4872a1fafc1d2aca68a7fdc2df"
-  dependencies:
-    lodash "^4.17.21"
-    resolve "^1.20.0"
 
 quick-lru@^4.0.1:
   version "4.0.1"
@@ -6925,13 +6918,13 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-testdouble@^3.16.5:
-  version "3.16.5"
-  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-3.16.5.tgz#4e51407b56f542b8cb57c485fff87248eb24d66d"
-  integrity sha512-2/0vR503/X/6LuZzQObpcBtu+KycyEnw7AdX/NPboR7sam1NTuYc128UMW8n7tBDpOPGAKqCUtKVBzvgV6C3bA==
+testdouble@^3.16.8:
+  version "3.16.8"
+  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-3.16.8.tgz#9c761031f3693d973c726e31a60ee73cd2871c96"
+  integrity sha512-jOKYRJ9mfgDxwuUOj84sl9DWiP1+KpHcgnhjlSHC8h1ZxJT3KD1FAAFVqnqmmyrzc/+0DRbI/U5xo1/K3PLi8w==
   dependencies:
-    lodash "^4.17.15"
-    quibble "^0.6.7"
+    lodash "^4.17.21"
+    quibble "^0.6.14"
     stringify-object-es5 "^2.5.0"
     theredoc "^1.0.0"
 
