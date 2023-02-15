@@ -113,11 +113,6 @@ function getYargsParser(manualArgv) {
         default: false,
         describe: 'Prints a list of all required trace categories and exits',
       },
-      'print-config': {
-        type: 'boolean',
-        default: false,
-        describe: 'Print the normalized config for the given config and options, then exit.',
-      },
       'debug-navigation': {
         type: 'boolean',
         describe: 'Pause after page load to wait for permission to continue the run, evaluate `continueLighthouseRun` in the console to continue.',
@@ -210,12 +205,16 @@ function getYargsParser(manualArgv) {
         type: 'string',
         describe: 'The path to the budget.json file for LightWallet.',
       },
+      'disable-full-page-screenshot': {
+        type: 'boolean',
+        describe: 'Disables collection of the full page screenshot, which can be quite large',
+      },
     })
     .group([
-      'save-assets', 'list-all-audits', 'list-locales', 'list-trace-categories', 'print-config', 'additional-trace-categories',
+      'save-assets', 'list-all-audits', 'list-locales', 'list-trace-categories', 'additional-trace-categories',
       'config-path', 'preset', 'chrome-flags', 'port', 'hostname', 'form-factor', 'screenEmulation', 'emulatedUserAgent',
       'max-wait-for-load', 'enable-error-reporting', 'gather-mode', 'audit-mode',
-      'only-audits', 'only-categories', 'skip-audits', 'budget-path',
+      'only-audits', 'only-categories', 'skip-audits', 'budget-path', 'disable-full-page-screenshot',
     ], 'Configuration:')
 
     // Output
@@ -317,7 +316,7 @@ Example: --output-path=./lighthouse-results.html`,
       //   - We're just printing the config.
       //   - We're in auditMode (and we have artifacts already)
       // If one of these don't apply, if no URL, stop the program and ask for one.
-      const isPrintSomethingMode = argv.listAllAudits || argv.listLocales || argv.listTraceCategories || argv.printConfig;
+      const isPrintSomethingMode = argv.listAllAudits || argv.listLocales || argv.listTraceCategories;
       const isOnlyAuditMode = !!argv.auditMode && !argv.gatherMode;
       if (isPrintSomethingMode || isOnlyAuditMode) {
         return true;

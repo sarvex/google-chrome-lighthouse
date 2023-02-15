@@ -45,7 +45,7 @@ class TimingSummary {
     /* eslint-disable max-len */
 
     const processedTrace = await ProcessedTrace.request(trace, context);
-    const processedNavigation = await requestOrUndefined(ProcessedNavigation, processedTrace);
+    const processedNavigation = await requestOrUndefined(ProcessedNavigation, trace);
     const speedline = await Speedline.request(trace, context);
     const firstContentfulPaint = await requestOrUndefined(FirstContentfulPaint, metricComputationData);
     const firstContentfulPaintAllFrames = await requestOrUndefined(FirstContentfulPaintAllFrames, metricComputationData);
@@ -87,7 +87,7 @@ class TimingSummary {
       cumulativeLayoutShiftMainFrame,
       totalCumulativeLayoutShift,
 
-      // Include all timestamps of interest from trace of tab
+      // Include all timestamps of interest from the processed trace
       observedTimeOrigin: processedTrace.timings.timeOrigin,
       observedTimeOriginTs: processedTrace.timestamps.timeOrigin,
       // For now, navigationStart is always timeOrigin.

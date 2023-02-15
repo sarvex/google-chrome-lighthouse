@@ -19,13 +19,12 @@ const sampleDevtoolsLog = readJson('../fixtures/traces/iframe-m79.devtoolslog.js
 function createRequest(
   requestId,
   url,
-  startTime = 0,
+  networkRequestTime = 0,
   initiator = null,
   resourceType = NetworkRequest.TYPES.Document
 ) {
-  startTime = startTime / 1000;
-  const endTime = startTime + 0.05;
-  return {requestId, url, startTime, endTime, initiator, resourceType};
+  const networkEndTime = networkRequestTime + 50;
+  return {requestId, url, networkRequestTime, networkEndTime, initiator, resourceType};
 }
 
 const TOPLEVEL_TASK_NAME = 'TaskQueueManager::ProcessTaskFromWorkQueue';
@@ -94,7 +93,7 @@ describe('PageDependencyGraph computed artifact:', () => {
   describe('#getDocumentUrls', () => {
     it('should resolve redirects', () => {
       const processedTrace = {
-        mainFrameIds: {
+        mainFrameInfo: {
           frameId: 'FRAMEID',
         },
       };

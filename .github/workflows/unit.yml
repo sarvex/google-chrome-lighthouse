@@ -16,6 +16,7 @@ jobs:
     name: node ${{ matrix.node }}
     env:
       LATEST_NODE: '18'
+      FORCE_COLOR: true
 
     steps:
     - name: git clone
@@ -93,8 +94,7 @@ jobs:
     - run: yarn install --frozen-lockfile --network-timeout 1000000
     - run: yarn build-report
 
-    # TODO: fix run-mocha-tests.js on windows.
-    # - run: yarn unit-cli
+    - run: yarn unit-cli
     - run: yarn diff:sample-json
 
     # Fail if any changes were written to any source files or generated untracked files (ex, from -GA).
