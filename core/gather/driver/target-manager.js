@@ -29,6 +29,8 @@ import {ProtocolSession} from '../session.js';
 /** @typedef {LH.Protocol.StrictEventEmitterClass<ProtocolEventMap>} ProtocolEventMessageEmitter */
 const ProtocolEventEmitter = /** @type {ProtocolEventMessageEmitter} */ (EventEmitter);
 
+const VALID_TARGET_TYPES = ['page', 'iframe', 'worker'];
+
 /**
  * Tracks targets (the page itself, its iframes, their iframes, etc) as they
  * appear and allows listeners to the flattened protocol events from all targets.
@@ -104,19 +106,18 @@ class TargetManager extends ProtocolEventEmitter {
     const newSession = new ProtocolSession(cdpSession);
 
     try {
-      const target = await newSession.sendCommand('Target.getTargetInfo').catch(() => null);
-      const targetType = target?.targetInfo?.type;
-      const hasValidTargetType = targetType === 'page' || targetType === 'iframe';
+      const {targetInfo} = await newSession.sendCommand('Target.getTargetInfo');
+
       // TODO: should detach from target in this case?
       // See pptr: https://github.com/puppeteer/puppeteer/blob/733cbecf487c71483bee8350e37030edb24bc021/src/common/Page.ts#L495-L526
-      if (!target || !hasValidTargetType) return;
+      if (!VALID_TARGET_TYPES.includes(targetInfo.type)) return;
 
       // No need to continue if target has already been seen.
-      const targetId = target.targetInfo.targetId;
+      const targetId = targetInfo.targetId;
       if (this._targetIdToTargets.has(targetId)) return;
 
-      newSession.setTargetInfo(target.targetInfo);
-      const targetName = target.targetInfo.url || target.targetInfo.targetId;
+      newSession.setTargetInfo(targetInfo);
+      const targetName = targetInfo.url || targetInfo.targetId;
       log.verbose('target-manager', `target ${targetName} attached`);
 
       const trueProtocolListener = this._getProtocolEventListener(newSession.id());
@@ -127,7 +128,7 @@ class TargetManager extends ProtocolEventEmitter {
       cdpSession.on('sessionattached', this._onSessionAttached);
 
       const targetWithSession = {
-        target: target.targetInfo,
+        target: targetInfo,
         cdpSession,
         session: newSession,
         protocolListener,
