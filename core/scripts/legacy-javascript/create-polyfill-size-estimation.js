@@ -37,6 +37,7 @@ import {LH_ROOT} from '../../../root.js';
 const hash = makeHash();
 const VARIANT_DIR = `${LH_ROOT}/core/scripts/legacy-javascript/variants/${hash}`;
 const OUTPUT_PATH = `${LH_ROOT}/core/audits/byte-efficiency/polyfill-graph-data.json`;
+const COMMON_MODULE = 'commonCoreJs';
 
 /**
  * @param {number[]} arr
@@ -63,26 +64,23 @@ function getPolyfillDependencies() {
     polyfillDependencies.set(name, bundleMap.sources.filter(s => s.startsWith('node_modules')));
   }
 
+  return polyfillDependencies;
+}
+
+async function main() {
+  const polyfillDependencies = getPolyfillDependencies();
+
+  // Find the common modules amongst all the corejs polyfills, and replace with a singular
+  // common module to make the graph smaller.
   const allCoreJsPolyfillModules = [...polyfillDependencies.values()];
   const commonModules = allCoreJsPolyfillModules[0].filter(potentialCommonModule => {
     return allCoreJsPolyfillModules.every(modules => modules.includes(potentialCommonModule));
   });
   for (const [name, modules] of polyfillDependencies.entries()) {
     const modulesCommonFlattened = modules.filter(module => !commonModules.includes(module));
-    modules.unshift('commonCoreJs');
+    modulesCommonFlattened.unshift(COMMON_MODULE);
     polyfillDependencies.set(name, modulesCommonFlattened);
   }
-  polyfillDependencies.set('commonCoreJs', commonModules);
-
-  for (const {name} of LegacyJavascript.getPolyfillData().filter(d => !d.corejs)) {
-    polyfillDependencies.set(name, commonModules);
-  }
-
-  return polyfillDependencies;
-}
-
-async function main() {
-  const polyfillDependencies = getPolyfillDependencies();
 
   const bundlePath =
     `${VARIANT_DIR}/all-legacy-polyfills/all-legacy-polyfills-core-js-3/main.bundle.min.js`;
@@ -102,12 +100,18 @@ async function main() {
   const moduleSizes = allModules.map(module => {
     return bundleFileSizes[module];
   });
+  allModules.unshift(COMMON_MODULE);
+  moduleSizes.unshift(sum(commonModules.map(m => bundleFileSizes[m])));
 
   /** @type {Record<string, number[]>} */
   const polyfillDependenciesEncoded = {};
   for (const [name, modules] of polyfillDependencies.entries()) {
     polyfillDependenciesEncoded[name] = modules.map(module => allModules.indexOf(module));
   }
+
+  // For now, hardcode non-corejs polyfills.
+  moduleSizes.push(3000);
+  polyfillDependenciesEncoded['focus-visible'] = [moduleSizes.length - 1];
 
   const maxSize = sum(moduleSizes);
 

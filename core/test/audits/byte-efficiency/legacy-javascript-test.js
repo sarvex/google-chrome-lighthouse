@@ -271,6 +271,7 @@ describe('LegacyJavaScript audit', () => {
         location: {line: 0, column: 0},
       },
     ]);
+    expect(result.items[0].wastedBytes).toBe(3000);
   });
 });
 

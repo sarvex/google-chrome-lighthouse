@@ -361,7 +361,6 @@ class LegacyJavascript extends ByteEfficiencyAudit {
       }
     }
 
-    if (polyfillResults.length > 0) estimatedWastedBytesFromPolyfills += graph.baseSize;
     estimatedWastedBytesFromPolyfills += [...modulesSeen].reduce((acc, moduleIndex) => {
       return acc + graph.moduleSizes[moduleIndex];
     }, 0);
