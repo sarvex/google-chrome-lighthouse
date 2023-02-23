@@ -34,7 +34,7 @@ const STAGE = process.env.STAGE || 'all';
 const mainCode = fs.readFileSync(`${scriptDir}/main.js`, 'utf-8');
 
 const plugins = LegacyJavascript.getTransformPatterns().map(pattern => pattern.name);
-const polyfills = LegacyJavascript.getPolyfillData();
+const polyfills = LegacyJavascript.getPolyfillData().filter(d => d.corejs);
 
 /**
  * @param {string} command
@@ -279,7 +279,7 @@ async function main() {
     }
 
     for (const polyfill of polyfills) {
-      const module = major === '2' ? polyfill.coreJs2Module : polyfill.coreJs3Module;
+      const module = major === '2' ? polyfill.modules[0] : polyfill.modules[1];
       await createVariant({
         group: `core-js-${major}-only-polyfill`,
         name: module,
@@ -288,7 +288,7 @@ async function main() {
     }
 
     const allPolyfillCode = polyfills.map(polyfill => {
-      const module = major === '2' ? polyfill.coreJs2Module : polyfill.coreJs3Module;
+      const module = major === '2' ? polyfill.modules[0] : polyfill.modules[1];
       return makeRequireCodeForPolyfill(module);
     }).join('\n');
     await createVariant({
