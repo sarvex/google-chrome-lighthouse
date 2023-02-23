@@ -55,7 +55,8 @@ function getPolyfillDependencies() {
   /** @type {Map<string, string[]>} */
   const polyfillDependencies = new Map();
 
-  for (const {name, coreJs3Module} of LegacyJavascript.getPolyfillData()) {
+  for (const {name, modules} of LegacyJavascript.getPolyfillData().filter(d => d.corejs)) {
+    const coreJs3Module = modules[1];
     const folder = coreJs3Module.replace(/[^a-zA-Z0-9]+/g, '-');
     const bundleMapPath =
       `${VARIANT_DIR}/core-js-3-only-polyfill/${folder}/main.bundle.min.js.map`;
