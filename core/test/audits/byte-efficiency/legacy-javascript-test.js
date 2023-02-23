@@ -251,6 +251,27 @@ describe('LegacyJavaScript audit', () => {
       },
     ]);
   });
+
+  it('detects none-corejs modules from source maps', async () => {
+    const map = {
+      sources: ['node_modules/focus-visible/dist/focus-visible.js'],
+      mappings: 'blah',
+    };
+    const script = {
+      code: '// blah blah blah',
+      url: 'https://www.example.com/0.js',
+      map,
+    };
+    const result = await getResult([script]);
+
+    expect(result.items).toHaveLength(1);
+    expect(result.items[0].subItems.items).toMatchObject([
+      {
+        signal: 'focus-visible',
+        location: {line: 0, column: 0},
+      },
+    ]);
+  });
 });
 
 describe('LegacyJavaScript signals', () => {
