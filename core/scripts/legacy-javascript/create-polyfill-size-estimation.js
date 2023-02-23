@@ -23,8 +23,6 @@
  * @property {Record<string, number[]>} dependencies indexed by the polyfill name. array of module indices
  * @property {number[]} moduleSizes indices in the arrays in `.dependencies` are for this array
  * @property {number} maxSize sum of `.moduleSizes`
- * @property {number} baseSize size of using core-js at all. sum of common modules, and does not show up
- *                             in `.dependencies` or `.moduleSizes`
 */
 
 import fs from 'fs';
@@ -65,14 +63,20 @@ function getPolyfillDependencies() {
     polyfillDependencies.set(name, bundleMap.sources.filter(s => s.startsWith('node_modules')));
   }
 
-  const allPolyfillModules = [...polyfillDependencies.values()];
-  const commonModules = allPolyfillModules[0].filter(potentialCommonModule => {
-    return allPolyfillModules.every(modules => modules.includes(potentialCommonModule));
+  const allCoreJsPolyfillModules = [...polyfillDependencies.values()];
+  const commonModules = allCoreJsPolyfillModules[0].filter(potentialCommonModule => {
+    return allCoreJsPolyfillModules.every(modules => modules.includes(potentialCommonModule));
   });
   for (const [name, modules] of polyfillDependencies.entries()) {
-    polyfillDependencies.set(name, modules.filter(module => !commonModules.includes(module)));
+    const modulesCommonFlattened = modules.filter(module => !commonModules.includes(module));
+    modules.unshift('commonCoreJs');
+    polyfillDependencies.set(name, modulesCommonFlattened);
   }
-  polyfillDependencies.set('common', commonModules);
+  polyfillDependencies.set('commonCoreJs', commonModules);
+
+  for (const {name} of LegacyJavascript.getPolyfillData().filter(d => !d.corejs)) {
+    polyfillDependencies.set(name, commonModules);
+  }
 
   return polyfillDependencies;
 }
@@ -102,19 +106,16 @@ async function main() {
   /** @type {Record<string, number[]>} */
   const polyfillDependenciesEncoded = {};
   for (const [name, modules] of polyfillDependencies.entries()) {
-    if (name === 'common') continue;
     polyfillDependenciesEncoded[name] = modules.map(module => allModules.indexOf(module));
   }
 
   const maxSize = sum(moduleSizes);
-  const baseSize = sum((polyfillDependencies.get('common') || []).map(m => bundleFileSizes[m]));
 
   /** @type {PolyfillSizeEstimator} */
   const polyfillDependencyGraphData = {
     moduleSizes,
     dependencies: polyfillDependenciesEncoded,
     maxSize,
-    baseSize,
   };
 
   const json = prettyJSONStringify(polyfillDependencyGraphData, {
