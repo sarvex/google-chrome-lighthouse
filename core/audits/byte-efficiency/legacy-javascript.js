@@ -177,7 +177,7 @@ class LegacyJavascript extends ByteEfficiencyAudit {
   }
 
   static getPolyfillData() {
-    /** @type {Array<{name: string, modules: string[], corejs?: true}>} */
+    /** @type {Array<{name: string, modules: string[], corejs?: boolean}>} */
     const data = [
       {name: 'focus-visible', modules: ['focus-visible']},
     ];
@@ -250,6 +250,16 @@ class LegacyJavascript extends ByteEfficiencyAudit {
     return data;
   }
 
+  static getCoreJsPolyfillData() {
+    return this.getPolyfillData().filter(d => d.corejs).map(d => {
+      return {
+        name: d.name,
+        coreJs2Module: d.modules[0],
+        coreJs3Module: d.modules[1],
+      };
+    });
+  }
+
   /**
    * @return {Pattern[]}
    */
@@ -257,7 +267,7 @@ class LegacyJavascript extends ByteEfficiencyAudit {
     /** @type {Pattern[]} */
     const patterns = [];
 
-    for (const {name} of this.getPolyfillData().filter(d => d.corejs)) {
+    for (const {name} of this.getCoreJsPolyfillData()) {
       const parts = name.split('.');
       const object = parts.length > 1 ? parts.slice(0, parts.length - 1).join('.') : null;
       const property = parts[parts.length - 1];

@@ -252,7 +252,7 @@ describe('LegacyJavaScript audit', () => {
     ]);
   });
 
-  it('detects none-corejs modules from source maps', async () => {
+  it('detects non-corejs modules from source maps', async () => {
     const map = {
       sources: ['node_modules/focus-visible/dist/focus-visible.js'],
       mappings: 'blah',
