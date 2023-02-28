@@ -147,6 +147,9 @@
   --sticky-header-background-color: var(--report-background-color);
   --sticky-header-buffer: calc(var(--topbar-height) + var(--sticky-header-height));
   --sticky-header-height: calc(var(--gauge-circle-size-sm) + var(--score-container-padding) * 2);
+  --table-group-header-separator-color: #D4D4D4;
+  --table-group-header-background-color: #EEF1F4;
+  --table-group-header-text-color: var(--color-gray-700);
   --table-higlight-background-color: hsla(210, 17%, 77%, 0.1);
   --tools-icon-color: var(--color-gray-600);
   --topbar-background-color: var(--color-white);
@@ -210,6 +213,9 @@
     --toplevel-warning-background-color: hsl(33deg 14% 18%);
     --toplevel-warning-message-text-color: var(--color-orange-700);
     --toplevel-warning-text-color: var(--color-gray-100);
+    --table-group-header-separator-color: var(--color-hover);
+    --table-group-header-background-color: var(--color-gray-800);
+    --table-group-header-text-color: var(--color-gray-100);
 
     /* SVGs */
     --plugin-icon-url: var(--plugin-icon-url-dark);
@@ -1526,13 +1532,14 @@
 }
 
 .lh-row--group {
-  background-color: var(--table-higlight-background-color);
+  background-color: var(--table-group-header-background-color);
 }
 
 .lh-row--group td {
+  border-top: 1px solid var(--table-group-header-separator-color);
   font-weight: bold;
   font-size: 1.05em;
-  color: var(--color-gray-700);
+  color: var(--table-group-header-text-color);
 }
 
 .lh-row--group td:first-child {
@@ -1606,6 +1613,10 @@
 
 .lh-table tr {
   vertical-align: middle;
+}
+
+.lh-table tr:hover {
+  background-color: var(--table-higlight-background-color);
 }
 
 /* Looks unnecessary, but mostly for keeping the <th>s left-aligned */
